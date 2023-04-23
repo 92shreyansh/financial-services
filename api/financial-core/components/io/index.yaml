@@ -1,0 +1,74 @@
+Search:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Search.yaml
+    - $ref: ./Search.yaml
+OnSearch:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnSearch.yaml
+    - $ref: ./OnSearch.yaml
+Select:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Select.yaml
+    - $ref: ./Select.yaml
+OnSelect:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnSelect.yaml
+    - $ref: ./OnSelect.yaml
+Init:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Init.yaml
+    - $ref: ./Init.yaml
+OnInit:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnInit.yaml
+    - $ref: ./OnInit.yaml
+Confirm:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Confirm.yaml
+    - $ref: ./Confirm.yaml
+OnConfirm:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnConfirm.yaml
+    - $ref: ./OnConfirm.yaml
+Cancel:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Cancel.yaml
+OnCancel:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnCancel.yaml
+Status:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Status.yaml
+OnStatus:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnStatus.yaml
+Track:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Track.yaml
+OnTrack:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnTrack.yaml
+Update:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Update.yaml
+OnUpdate:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnUpdate.yaml
+Support:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Support.yaml
+OnSupport:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnSupport.yaml
+Rating:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/Rating.yaml
+OnRating:
+  allOf:
+    - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnRating.yaml
+
+#Responses
+DefaultResponse:
+  allOf:
+    - $ref: '../../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml#/content/application~1json/schema'
+    - $ref: ./DefaultResponse.yaml

@@ -1,0 +1,9 @@
+#/bin/bash
+
+module_name=$1
+
+[ ! -d api/$module_name ] && echo "[ERROR]module does not exist" && exit 1
+
+swagger-cli bundle ./api/$module_name/components/$module_name-unresolved.yaml --outfile ./api/$module_name/build/$module_name.yaml -t yaml
+
+exit 0

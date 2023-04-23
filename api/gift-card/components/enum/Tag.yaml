@@ -1,0 +1,12 @@
+
+brand_details:
+  enum:
+    - BRAND_NAME
+    - BRAND_PHONE
+    - BRAND_EMAIL
+item_details:
+  enum:
+    - OCCASION
+    - USABILITY
+    - EXPIRY_PERIOD
+    - USAGE_TERMS_CONDITION

@@ -1,0 +1,33 @@
+summary: ""
+value:
+    context:
+        action: on_cancel
+        bap_id: buyerapp.com
+        bap_uri: https://buyerapp.com/ondc
+        bpp_id: sellerapp.com
+        bpp_uri: https://sellerapp.com/ondc
+        domain: FIS10
+        location:
+            city:
+                name: std::080
+            country:
+                code: IND
+        message_id: "2766391254372"
+        timestamp: "2023-03-10T10:00:00.402Z"
+        transaction_id: c837e6a5-7d6f-493b-a5bf-482cbc9c8767
+        ttl: PT30S
+        version: 2.0.0
+    message:
+        order:
+            id: O1
+            state: CANCELLED
+            tags:
+                - descriptor:
+                    code: CANCELLATION_REASONS
+                  lists:
+                    - descriptor:
+                        code: "011"
+                      value: Ordered by mistake
+                    - descriptor:
+                        code: "010"
+                      value: Not needed anymore

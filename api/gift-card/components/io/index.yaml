@@ -1,0 +1,74 @@
+Search:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Search"
+    - $ref: ./Search.yaml
+OnSearch:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnSearch"
+    - $ref: ./OnSearch.yaml
+Select:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Select"
+    - $ref: ./Select.yaml
+OnSelect:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnSelect"
+    - $ref: ./OnSelect.yaml
+Init:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Init"
+    - $ref: ./Init.yaml
+OnInit:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnInit"
+    - $ref: ./OnInit.yaml
+Confirm:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Confirm"
+    - $ref: ./Confirm.yaml
+OnConfirm:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnConfirm"
+    - $ref: ./OnConfirm.yaml
+Cancel:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Cancel"
+OnCancel:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnCancel"
+Status:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Status"
+OnStatus:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnStatus"
+Track:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Track"
+OnTrack:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnTrack"
+Update:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Update"
+OnUpdate:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnUpdate"
+Support:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Support"
+OnSupport:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnSupport"
+Rating:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/Rating"
+OnRating:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/OnRating"
+
+#Response
+#Responses
+DefaultResponse:
+  allOf:
+    - $ref: "../../../financial-core/components/io/index.yaml#/DefaultResponse"

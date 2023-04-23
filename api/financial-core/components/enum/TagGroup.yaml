@@ -1,0 +1,6 @@
+intent:
+  enum:
+    - BUYER_FEE
+order:
+  enum:
+    - BUYER_FEE

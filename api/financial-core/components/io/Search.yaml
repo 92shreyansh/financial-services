@@ -1,0 +1,54 @@
+properties:
+  context:
+    allOf:
+      #adding Enum for FSI
+      - properties:
+          domain:
+            $ref: '../enum/index.yaml#/Domain'
+      - required:
+        - domain
+        - action
+        - location
+        - version
+        - bap_id
+        - bap_uri
+        - transaction_id
+        - message_id
+        - timestamp
+  message: 
+    type: object
+    properties:
+      intent:
+        properties:
+          tags: 
+            properties:
+              descriptor:
+                allOf:
+                  # adding ENUM for tag groups code in intent
+                  - properties:
+                      code:
+                        $ref: '../enum/index.yaml#/TagGroup/intent'
+                  # making descriptor code reqired if taggroup is used
+                  - required:
+                      - code
+              list:
+                items:
+                  properties:
+                    descriptor:
+                        allOf:
+                          # adding ENUM for tags code in buyer fee tag group
+                          - properties:
+                              code:
+                                $ref: '../enum/index.yaml#/Tag/buyer_fee'
+                          # making descriptor code reqired if taggroup is used
+                          - required:
+                              - code
+                  required:
+                    - descriptor
+                    - value
+                minLength: 1
+            required:
+              - descriptor
+              - list
+    required:
+      - intent

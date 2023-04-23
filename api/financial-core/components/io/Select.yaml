@@ -1,0 +1,48 @@
+properties:
+  context:
+    allOf:
+      - properties:
+          domain:
+            $ref: '../enum/index.yaml#/Domain'
+      - required:
+        - domain
+        - action
+        - location
+        - version
+        - bap_id
+        - bap_uri
+        - transaction_id
+        - message_id
+        - timestamp
+  message:
+    properties:
+      order:
+        allOf:
+          - properties:              
+              items:
+                items:
+                  required:
+                    - id
+                minLength: 1
+          # Tags sent during select
+          - properties:
+              tags: 
+                properties:
+                  descriptor:
+                    properties:
+                      code:
+                        allOf:
+                          - $ref: '../enum/TagGroup.yaml#/order'
+                    required:
+                      - code
+                  list:
+                    oneOf: 
+                      - properties:
+                          descriptor:
+                              properties:
+                                code:
+                                  $ref: '../enum/index.yaml#/Tag/buyer_fee'
+                              required:
+                                - code
+          - required:
+              - items

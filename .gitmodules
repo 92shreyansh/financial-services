@@ -1,0 +1,4 @@
+[submodule "beckn-core-protocol-specs"]
+	path = beckn-core-protocol-specs
+	url = https://github.com/beckn/protocol-specifications.git
+	branch = master

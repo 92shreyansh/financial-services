@@ -1,0 +1,105 @@
+summary: Getting the order status
+value:
+    context:
+        action: status
+        bap_id: buyerapp.com
+        bap_uri: https://buyerapp.com/ondc
+        bpp_id: sellerapp.com
+        bpp_uri: https://sellerapp.com/ondc
+        domain: FIS10
+        location:
+            city:
+                name: std::080
+            country:
+                code: IND
+        message_id: "2766391254372"
+        timestamp: "2023-03-10T10:00:00.402Z"
+        transaction_id: c837e6a5-7d6f-493b-a5bf-482cbc9c8767
+        ttl: PT30S
+        version: 2.0.0
+    created_at: "2023-03-10T10:02:18.492Z"
+    message:
+        order:
+            billing:
+                address: B005 Aspire Heights
+                city:
+                    code: BAN
+                    name: Bangalore
+                email: test@test.com
+                name: 'House #'
+                phone: "9999888877"
+                state:
+                    code: KA
+                    name: Karnataka
+            breakup:
+                - item:
+                    id: GC1
+                    quantity: "1"
+                  price: "100"
+                  title: tax
+                - item:
+                    id: GC1
+                    quantity: "1"
+                  price: "100"
+                  title: convenience fee
+                - item:
+                    id: GC1
+                    quantity: "1"
+                  price: "100"
+                  title: price
+            fulfillments:
+                - customer:
+                    conatact:
+                        email: test@test.com
+                        phone: "9999888877"
+                    person:
+                        name: Reciever Name
+                  id: F1
+                  type: ONLINE_EMAIL_SMS
+            id: O1
+            items:
+                - fulfillment_ids:
+                    - F1
+                  id: GC1
+                  quantity:
+                    count: "1"
+                  tags:
+                    - descriptor:
+                        code: CUSTOMIZATION
+                      list:
+                        - descriptor:
+                            code: RECEIVER_NAME
+                          value: Test Name
+                        - descriptor:
+                            code: MESSAGE
+                          value: Happy Birthday to you !!
+            quote:
+                id: Q1
+                price:
+                    currency: INR
+                    value: "1500"
+            state: PROCESSING
+            ttl: P1D
+        payment:
+            collected_by: BAP
+            params:
+                amount: "1110"
+                bank_account_number: ""
+                bank_code: ""
+                currency: INR
+                source_bank_code: ""
+                transaction_id: "12345"
+                virtual_payment_address: gft@oksbi
+            status: PAID
+            tags:
+                - descriptor:
+                    code: FEE_TYPE
+                  list:
+                    - descriptor:
+                        code: BUYER_FINDER_FEES
+                      value: PERCENTAGE
+                    - descriptor:
+                        code: BUYER_FINDER_FEES_Value
+                      value: "3"
+            type: ON-ORDER
+    updated_at: "2023-03-10T10:02:18.492Z"

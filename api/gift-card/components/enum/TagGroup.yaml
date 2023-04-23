@@ -1,0 +1,5 @@
+item:
+  enum:
+    - BRAND_DETAILS
+    - ITEM_DETAILS
+    - DENOMINATION

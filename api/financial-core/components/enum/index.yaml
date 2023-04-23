@@ -1,0 +1,6 @@
+Domain:
+  $ref: ./Domain.yaml
+Tag:
+  $ref: ./Tag.yaml
+TagGroup:
+  $ref: ./TagGroup.yaml

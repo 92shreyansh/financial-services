@@ -1,0 +1,170 @@
+Ack:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Ack.yaml"
+  
+AddOn:
+  $ref: "../../../../beckn-core-protocol-specs/schema/AddOn.yaml"
+
+Address:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Address.yaml"
+
+Agent:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Agent.yaml"
+
+Authorization:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Authorization.yaml"
+
+Billing:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Billing.yaml"
+
+Cancellation:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Cancellation.yaml"
+
+CancellationTerm:
+  $ref: "../../../../beckn-core-protocol-specs/schema/CancellationTerm.yaml"
+
+Catalog:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Catalog.yaml"
+
+Category:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Category.yaml"
+
+Circle:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Circle.yaml"
+
+City:
+  $ref: "../../../../beckn-core-protocol-specs/schema/City.yaml"
+
+Contact:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Contact.yaml"
+
+Context:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Context.yaml"
+
+Country:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Country.yaml"
+
+Credential:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Credential.yaml"
+
+Customer:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Customer.yaml"
+
+DecimalValue:
+  $ref: "../../../../beckn-core-protocol-specs/schema/DecimalValue.yaml"
+
+Descriptor:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Descriptor.yaml"
+
+Domain:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Domain.yaml"
+
+Duration:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Duration.yaml"
+
+Error:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Error.yaml"
+
+Fee:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Fee.yaml"
+
+Form:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Form.yaml"
+
+Fulfillment:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Fulfillment.yaml"
+
+FulfillmentState:
+  $ref: "../../../../beckn-core-protocol-specs/schema/FulfillmentState.yaml"
+
+Gps:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Gps.yaml"
+
+Image:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Image.yaml"
+
+Intent:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Intent.yaml"
+
+ItemQuantity:
+  $ref: "../../../../beckn-core-protocol-specs/schema/ItemQuantity.yaml"
+
+Item:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Item.yaml"
+
+Location:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Location.yaml"
+
+MediaFile:
+  $ref: "../../../../beckn-core-protocol-specs/schema/MediaFile.yaml"
+
+Offer:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Offer.yaml"
+
+Option:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Option.yaml"
+
+Order:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Order.yaml"
+
+Organization:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Organization.yaml"
+
+Payment:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Payment.yaml"
+
+Person:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Person.yaml"
+
+Price:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Price.yaml"
+
+Provider:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Provider.yaml"
+
+Quotation:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Quotation.yaml"
+
+Rating:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Rating.yaml"
+
+Region:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Region.yaml"
+
+ReplacementTerm:
+  $ref: "../../../../beckn-core-protocol-specs/schema/ReplacementTerm.yaml"
+
+ReturnTerm:
+  $ref: "../../../../beckn-core-protocol-specs/schema/ReturnTerm.yaml"
+
+Scalar:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Scalar.yaml"
+
+Schedule:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Schedule.yaml"
+
+State:
+  $ref: "../../../../beckn-core-protocol-specs/schema/State.yaml"
+
+Stop:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Stop.yaml"
+
+Support:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Support.yaml"
+
+Tag:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Tag.yaml"
+
+TagGroup:
+  $ref: "../../../../beckn-core-protocol-specs/schema/TagGroup.yaml"
+
+Time:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Time.yaml"
+
+Tracking:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Tracking.yaml"
+
+Vehicle:
+  $ref: "../../../../beckn-core-protocol-specs/schema/Vehicle.yaml"
+
+XInput:
+  $ref: "../../../../beckn-core-protocol-specs/schema/XInput.yaml"

@@ -1,0 +1,4 @@
+buyer_fee:
+  enum:
+    - BUYER_FINDER_FEE_AMOUNT
+    - BUYER_FINDER_FEE_PERCENTAGE

@@ -1,0 +1,61 @@
+summary: select a gift card with standard message
+value:
+    context:
+        action: select
+        bap_id: buyerapp.com
+        bap_uri: https://buyerapp.com/ondc
+        bpp_id: sellerapp.com
+        bpp_uri: https://sellerapp.com/ondc
+        domain: FIS10
+        location:
+            city:
+                name: std::080
+            country:
+                code: IND
+        message_id: "2766391254372"
+        timestamp: "2023-03-10T10:00:00.402Z"
+        transaction_id: c837e6a5-7d6f-493b-a5bf-482cbc9c8767
+        ttl: PT30S
+        version: 2.0.0
+    message:
+        order:
+            fulfillments:
+                - id: F1
+                  type: ONLINE_EMAIL_SMS
+            items:
+                - category_ids:
+                    - C1
+                  descriptor:
+                    images:
+                        - https://giftcard.com/images/02.png
+                    long_desc: Birthday Gift Card
+                    name: Birthday Gift Card
+                    short_desc: Birthday Gift Card
+                    symbol: https://giftcard.com/images/01.png
+                  fulfillment_ids:
+                    - F1
+                  id: GC1
+                  price:
+                    currency: INR
+                    maximum_value: "10000"
+                    minimum_value: "1000"
+                  quantity:
+                    selected:
+                        count: "1"
+            provider:
+                categories:
+                    - descriptor:
+                        code: ONLINE
+                      id: C1
+                descriptor:
+                    images:
+                        - https://giftcard.com/images/store-image
+                    long_desc: Online Gift Card Store
+                    name: Gift card store
+                    short_desc: Online Gift Card Store
+                    symbol: https://giftcard.com/images/1-image
+                id: P1
+                time:
+                    label: enable
+                    timestamp: "2023-03-10T10:00:30.000Z"
+                ttl: P1D

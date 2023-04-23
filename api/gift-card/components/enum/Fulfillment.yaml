@@ -1,0 +1,4 @@
+enum:
+  - ONLINE_EMAIL_SMS
+  - ONLINE_EMAIL
+  - ONLINE_SMS

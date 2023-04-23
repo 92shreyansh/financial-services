@@ -1,0 +1,18 @@
+properties:
+  message:
+    type: object
+    properties:
+      ack:
+        allOf:
+          - $ref: "../schema/index.yaml#/Ack"
+          - properties:
+              status:
+                enum:
+                  - ACK
+                  - NACK
+    required:
+      - ack
+  error:
+    $ref: "../schema/index.yaml#/Error"
+required:
+  - message
