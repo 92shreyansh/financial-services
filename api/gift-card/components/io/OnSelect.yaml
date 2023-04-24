@@ -15,19 +15,3 @@ properties:
                     - code
             required:
               - country
-  message:
-    allOf:
-      - properties:
-          order:
-            allOf:
-              - properties:
-                  items:
-                    items:
-                      required:
-                        - id
-                        - price
-                    minLength: 1
-              - required:
-                  - items
-      - required:
-          - order

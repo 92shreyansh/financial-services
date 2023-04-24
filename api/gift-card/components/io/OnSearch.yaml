@@ -17,22 +17,31 @@ properties:
               - country
   message:
     allOf:
+      # add enum for seller app fulfillment types
       - properties:
           catalog:
-            allOf:
-              - properties:
-                  providers:
+            properties:
+              fulfillments:
+                items:
+                  properties:
+                    type:
+                      $ref: '../enum/index.yaml#/Fulfillment'
+                  required:
+                    - id
+                    - type
+                minLength: 1
+      # add enum for provider fulfillment types
+      - properties:
+          catalog:
+            properties:
+              providers:
+                properties:
+                  fulfillments:
                     items:
                       properties:
-                        items:
-                          items:
-                            required:
-                              - id
-                              - price
-                          minLength: 1
+                        type:
+                          $ref: '../enum/index.yaml#/Fulfillment'
                       required:
                         - id
-                        - items
+                        - type
                     minLength: 1
-              - required:
-                  - providers

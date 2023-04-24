@@ -18,6 +18,7 @@ properties:
     properties:
       order:
         allOf:
+          # Atleast one item to be selected
           - properties:              
               items:
                 items:

@@ -1,4 +1,4 @@
-summary: Get Search Response seller app fulfillment
+summary: Get Search Response provider fulfillment
 value:
     context:
         action: on_search
@@ -32,6 +32,11 @@ value:
                     - descriptor:
                         code: ONLINE
                       id: 482cbc9c-c837-a5bf-e6a5-4493b7d6f87C1
+                  fulfillments:
+                    - id: c837bc9c-4493-a5bf-e6a5-482cb7d6f87F1
+                      type: ONLINE_EMAIL
+                    - id: a5bf4493-c837-bc9c-e6a5-482cb7d6f87F2
+                      type: ONLINE_SMS
                   descriptor:
                     images:
                         - https://giftcard.com/images/store-image
@@ -51,8 +56,9 @@ value:
                         short_desc: Birthday Gift Card
                         symbol: https://giftcard.com/images/01.png
                       fulfillment_ids:
-                        - 493b7d6f-e6a5-c837-a5bf-482cbc9c87F1
-                      id: c837e6a5-482c-a5bf-493b-7d6fbc9c8GC1
+                        - c837bc9c-4493-a5bf-e6a5-482cb7d6f87F1
+                        - a5bf4493-c837-bc9c-e6a5-482cb7d6f87F2
+                      id: c837e6a5-482c-a5bf-493b-7d6fbc9cf8GC1
                       price:
                         currency: INR
                         maximum_value: "10000"

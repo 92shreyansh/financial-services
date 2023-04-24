@@ -138,8 +138,6 @@ paths:
                     bap_uri: 'https://buyerapp.com/ondc'
                     domain: FIS10
                     location:
-                      city:
-                        name: 'std::080'
                       country:
                         code: IND
                     message_id: '2766391254372'
@@ -169,8 +167,6 @@ paths:
                     bap_uri: 'https://buyerapp.com/ondc'
                     domain: FIS10
                     location:
-                      city:
-                        name: 'std::080'
                       country:
                         code: IND
                     message_id: '2766391254372'
@@ -185,7 +181,7 @@ paths:
                           code: BIRTHDAY_CARD
                     tags:
                       - descriptor:
-                          code: ONLINE
+                          code: BUYER_FEES
                         display: false
                         list:
                           - descriptor:
@@ -289,18 +285,6 @@ paths:
                                         - code
                               required:
                                 - country
-                    message:
-                      properties:
-                        order:
-                          allOf:
-                            - properties:
-                                items:
-                                  minItems: 1
-                                  items:
-                                    required:
-                                      - id
-                            - required:
-                                - items
             examples:
               Example_0:
                 summary: select a gift card with standard message
@@ -447,23 +431,6 @@ paths:
                                         - code
                               required:
                                 - country
-                    message:
-                      properties:
-                        order:
-                          allOf:
-                            - properties:
-                                items:
-                                  items:
-                                    required:
-                                      - id
-                                  minLength: 1
-                                billing:
-                                  required:
-                                    - name
-                                    - address
-                            - required:
-                                - items
-                                - billing
             examples:
               Example_0:
                 summary: update the billing details with custom message
@@ -635,43 +602,6 @@ paths:
                                         - code
                               required:
                                 - country
-                    message:
-                      allOf:
-                        - properties:
-                            order:
-                              allOf:
-                                - properties:
-                                    items:
-                                      items:
-                                        required:
-                                          - id
-                                      minLength: 1
-                                    billing:
-                                      required:
-                                        - name
-                                        - address
-                                    quote:
-                                      properties:
-                                        breakup:
-                                          items:
-                                            required:
-                                              - title
-                                          minLength: 1
-                                      required:
-                                        - breakup
-                                    payments:
-                                      items:
-                                        required:
-                                          - id
-                                          - type
-                                          - collected_by
-                                          - params
-                                      minLength: 1
-                                - required:
-                                    - items
-                                    - billing
-                                    - quote
-                                    - payments
             examples:
               Example_0:
                 summary: Sending order confirmation payment collected by BAP
@@ -1077,26 +1007,33 @@ paths:
                       allOf:
                         - properties:
                             catalog:
-                              allOf:
-                                - properties:
-                                    providers:
+                              properties:
+                                fulfillments:
+                                  items:
+                                    properties:
+                                      type:
+                                        $ref: '#/components/x-enum/Fulfillment'
+                                    required:
+                                      - id
+                                      - type
+                                  minLength: 1
+                        - properties:
+                            catalog:
+                              properties:
+                                providers:
+                                  properties:
+                                    fulfillments:
                                       items:
                                         properties:
-                                          items:
-                                            items:
-                                              required:
-                                                - id
-                                                - price
-                                            minLength: 1
+                                          type:
+                                            $ref: '#/components/x-enum/Fulfillment'
                                         required:
                                           - id
-                                          - items
+                                          - type
                                       minLength: 1
-                                - required:
-                                    - providers
             examples:
               Example_0:
-                summary: Get Search Response
+                summary: Get Search Response seller app fulfillment
                 value:
                   context:
                     action: on_search
@@ -1106,8 +1043,6 @@ paths:
                     bpp_uri: 'https://sellerapp.com/ondc'
                     domain: FIS10
                     location:
-                      city:
-                        name: 'std::080'
                       country:
                         code: IND
                     message_id: '2766391254372'
@@ -1125,13 +1060,13 @@ paths:
                         short_desc: Online Gift Card Store
                         symbol: 'https://giftcard.com/images/1-image'
                       fulfillments:
-                        - id: F1
+                        - id: 493b7d6f-e6a5-c837-a5bf-482cbc9c87F1
                           type: ONLINE_EMAIL_SMS
                       providers:
                         - categories:
                             - descriptor:
                                 code: ONLINE
-                              id: C1
+                              id: 482cbc9c-c837-a5bf-e6a5-4493b7d6f87C1
                           descriptor:
                             images:
                               - 'https://giftcard.com/images/store-image'
@@ -1139,10 +1074,10 @@ paths:
                             name: Gift card store
                             short_desc: Online Gift Card Store
                             symbol: 'https://giftcard.com/images/1-image'
-                          id: P1
+                          id: a5bfe6a5-7d6f-c837-493b-482cbc9c87P1
                           items:
                             - category_ids:
-                                - C1
+                                - 482cbc9c-c837-a5bf-e6a5-4493b7d6f87C1
                               descriptor:
                                 images:
                                   - 'https://giftcard.com/images/02.png'
@@ -1151,15 +1086,12 @@ paths:
                                 short_desc: Birthday Gift Card
                                 symbol: 'https://giftcard.com/images/01.png'
                               fulfillment_ids:
-                                - F1
-                              id: GC1
+                                - 493b7d6f-e6a5-c837-a5bf-482cbc9c87F1
+                              id: c837e6a5-482c-a5bf-493b-7d6fbc9c8GC1
                               price:
                                 currency: INR
                                 maximum_value: '10000'
                                 minimum_value: '1000'
-                          time:
-                            label: enable
-                            timestamp: '2023-03-10T10:00:30.000Z'
                           ttl: P1D
       responses:
         default:
@@ -1243,22 +1175,6 @@ paths:
                                         - code
                               required:
                                 - country
-                    message:
-                      allOf:
-                        - properties:
-                            order:
-                              allOf:
-                                - properties:
-                                    items:
-                                      items:
-                                        required:
-                                          - id
-                                          - price
-                                      minLength: 1
-                                - required:
-                                    - items
-                        - required:
-                            - order
             examples:
               Example_0:
                 summary: select items with standard messsage
@@ -1564,44 +1480,7 @@ paths:
                                     - required:
                                         - code
                               required:
-                                - coun
-                    message:
-                      allOf:
-                        - properties:
-                            order:
-                              allOf:
-                                - properties:
-                                    items:
-                                      items:
-                                        required:
-                                          - id
-                                      minLength: 1
-                                    billing:
-                                      required:
-                                        - name
-                                        - address
-                                    quote:
-                                      properties:
-                                        breakup:
-                                          items:
-                                            required:
-                                              - title
-                                          minLength: 1
-                                      required:
-                                        - breakup
-                                    payments:
-                                      items:
-                                        required:
-                                          - id
-                                          - type
-                                          - collected_by
-                                          - params
-                                      minLength: 1
-                                - required:
-                                    - items
-                                    - billing
-                                    - quote
-                                    - payments
+                                - country
             examples:
               Example_0:
                 summary: Settlement details when payment is collected by BAP
@@ -1908,44 +1787,6 @@ paths:
                                         - code
                               required:
                                 - country
-                    message:
-                      allOf:
-                        - properties:
-                            order:
-                              allOf:
-                                - properties:
-                                    items:
-                                      items:
-                                        required:
-                                          - id
-                                      minLength: 1
-                                    billing:
-                                      required:
-                                        - name
-                                        - address
-                                    quote:
-                                      properties:
-                                        breakup:
-                                          items:
-                                            required:
-                                              - title
-                                          minLength: 1
-                                      required:
-                                        - breakup
-                                    payments:
-                                      items:
-                                        required:
-                                          - id
-                                          - type
-                                          - collected_by
-                                          - params
-                                      minLength: 1
-                                - required:
-                                    - id
-                                    - items
-                                    - billing
-                                    - quote
-                                    - payments
             examples:
               Example_0:
                 summary: 'Accepting the order,when payment collected by BAP'

@@ -6,8 +6,6 @@ value:
         bap_uri: https://buyerapp.com/ondc
         domain: FIS10
         location:
-            city:
-                name: std::080
             country:
                 code: IND
         message_id: "2766391254372"

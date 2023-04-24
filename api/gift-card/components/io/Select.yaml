@@ -15,16 +15,3 @@ properties:
                     - code
             required:
               - country
-  message:
-    properties:
-      order:
-        allOf:
-          - properties:
-              items:
-                # minimum 1 item required
-                minItems: 1
-                items:
-                  required:
-                    - id
-          - required:
-              - items
