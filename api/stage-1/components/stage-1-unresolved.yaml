@@ -1,0 +1,345 @@
+openapi: 3.0.0
+info:
+  title: ONDC Base Protocal for Gift Card
+  description: ONDC Base Protocal for Gift Card
+  version: "1.0.0"
+
+security:
+  - SubscriberAuth: []
+paths:
+  /search:
+    post:
+      tags:
+        - ONDC Provider Platform
+        - ONDC Gateway
+      description: BAP declares the customer's intent to buy/avail products or services
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/Search.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/search/example_0.yaml"
+              Example_1:
+                $ref: "./examples/search/example_1.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /select:
+    post:
+      tags:
+        - ONDC Provider Platform
+      description: BAP declares the customer's cart (or equivalent) created by selecting objects from the catalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Select.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/select/example_0.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /init:
+    post:
+      tags:
+        - ONDC Provider Platform
+      description: Initialize an order by providing billing and/or shipping details
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Init.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/init/example_0.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /confirm:
+    post:
+      tags:
+        - ONDC Provider Platform
+      description: Initialize an order by providing billing and/or shipping details
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Confirm.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/confirm/example_0.yaml"
+              Example_1:
+                $ref: "./examples/confirm/example_1.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /status:
+    post:
+      tags:
+        - ONDC Provider Platform
+      description: Fetch the latest order object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Status.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/status/example_0.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /track:
+    post:
+      tags:
+        - ONDC Provider Platform
+      description: Track an active order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Track.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+  /cancel:
+    post:
+      tags:
+        - ONDC Provider Platform
+      description: Cancel an order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Cancel.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /update:
+    post:
+      tags:
+        - ONDC Provider Platform
+      description: Remove object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Update.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /rating:
+    post:
+      tags:
+        - ONDC Provider Platform
+      description: Provide feedback on a service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Rating.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /support:
+    post:
+      tags:
+        - ONDC Provider Platform
+      description: Contact support
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/Support.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_search:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: BPP sends its catalog in response to a search request. 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnSearch.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/on_search/example_0.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_select:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: Send draft order object with quoted price for selected items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/OnSelect.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/on_select/example_0.yaml"
+              Example_1:
+                $ref: "./examples/on_select/example_1.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_init:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: Send order object with payment details updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/OnInit.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/on_init/example_0.yaml"
+              Example_1:
+                $ref: "./examples/on_init/example_1.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_confirm:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: Send active order object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/OnConfirm.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/on_confirm/example_0.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_track:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: Send tracking details of an active order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/OnTrack.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_cancel:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: Send cancellation request_id with reasons list in case of cancellation request. Else send cancelled order object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnCancel.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/on_cancel/example_0.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_update:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: Returns updated service with updated runtime object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnUpdate.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_status:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: Fetch the status of a Service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnStatus.yaml"
+            examples:
+              Example_0:
+                $ref: "./examples/on_status/example_0.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_rating:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: Provide feedback on a service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnRating.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+
+  /on_support:
+    post:
+      tags:
+        - ONDC Application Platform
+      description: Contact Support
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnSupport.yaml"
+      responses:
+        default:
+          $ref: "#/components/responses/default"
+components:
+  securitySchemes:
+    SubscriberAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Signature of message body using BAP or BPP subscriber''s signing public key. <br/><br/>Format:<br/><br/><code>Authorization : Signature keyId="{subscriber_id}|{unique_key_id}|{algorithm}",algorithm="ed25519",created="1606970629",expires="1607030629",headers="(created) (expires) digest",signature="Base64(signing string)"</code>'
+  responses:
+    default:
+      description: Acknowledgement of message received after successful validation of schema and signature
+      content:
+        application/json:
+          schema:
+            $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
+  schemas:
+    $ref: "../../../beckn-core-protocol-specs/api/transaction/components/schema/index.yaml"

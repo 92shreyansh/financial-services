@@ -1,0 +1,60 @@
+summary: Get Search Response seller app fulfillment
+value:
+    context:
+        action: on_search
+        bap_id: buyerapp.com
+        bap_uri: https://buyerapp.com/ondc
+        bpp_id: sellerapp.com
+        bpp_uri: https://sellerapp.com/ondc
+        domain: FIS10
+        location:
+            country:
+                code: IND
+        message_id: "2766391254372"
+        timestamp: "2023-03-10T10:00:00.402Z"
+        transaction_id: c837e6a5-7d6f-493b-a5bf-482cbc9c8767
+        ttl: PT30S
+        version: 2.0.0
+    message:
+        catalog:
+            descriptor:
+                images:
+                    - https://giftcard.com/images/store-image
+                long_desc: Online Gift Card Store
+                name: Gift card store
+                short_desc: Online Gift Card Store
+                symbol: https://giftcard.com/images/1-image
+            fulfillments:
+                - id: 493b7d6f-e6a5-c837-a5bf-482cbc9c87F1
+                  type: ONLINE_EMAIL_SMS
+            providers:
+                - categories:
+                    - descriptor:
+                        code: ONLINE
+                      id: 482cbc9c-c837-a5bf-e6a5-4493b7d6f87C1
+                  descriptor:
+                    images:
+                        - https://giftcard.com/images/store-image
+                    long_desc: Online Gift Card Store
+                    name: Gift card store
+                    short_desc: Online Gift Card Store
+                    symbol: https://giftcard.com/images/1-image
+                  id: a5bfe6a5-7d6f-c837-493b-482cbc9c87P1
+                  items:
+                    - category_ids:
+                        - 482cbc9c-c837-a5bf-e6a5-4493b7d6f87C1
+                      descriptor:
+                        images:
+                            - https://giftcard.com/images/02.png
+                        long_desc: Birthday Gift Card
+                        name: Birthday Gift Card
+                        short_desc: Birthday Gift Card
+                        symbol: https://giftcard.com/images/01.png
+                      fulfillment_ids:
+                        - 493b7d6f-e6a5-c837-a5bf-482cbc9c87F1
+                      id: c837e6a5-482c-a5bf-493b-7d6fbc9c8GC1
+                      price:
+                        currency: INR
+                        maximum_value: "10000"
+                        minimum_value: "1000"
+                  ttl: P1D

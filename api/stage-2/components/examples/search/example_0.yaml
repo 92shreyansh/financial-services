@@ -1,0 +1,28 @@
+summary: Search Gift card by gift card name
+value:
+    context:
+        action: search
+        bap_id: buyerapp.com
+        bap_uri: https://buyerapp.com/ondc
+        domain: FIS10
+        location:
+            country:
+                code: IND
+        message_id: "2766391254372"
+        timestamp: "2023-03-10T10:00:00.402Z"
+        transaction_id: c837e6a5-7d6f-493b-a5bf-482cbc9c8767
+        ttl: PT30S
+        version: 2.0.0
+    message:
+        intent:
+            item:
+                descriptor:
+                    name: free text to search item
+        tags:
+            - descriptor:
+                code: BUYER_FEES
+              display: false
+              list:
+                - descriptor:
+                    code: BUYER_FINDER_FEES_PERCENTAGE
+                  value: "3"
