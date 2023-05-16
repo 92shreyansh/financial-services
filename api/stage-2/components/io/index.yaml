@@ -67,8 +67,3 @@ OnRating:
   allOf:
     - $ref: ../../../../beckn-core-protocol-specs/api/transaction/components/io/OnRating.yaml
 
-#Responses
-DefaultResponse:
-  allOf:
-    - $ref: '../../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml#/content/application~1json/schema'
-    - $ref: ./DefaultResponse.yaml
