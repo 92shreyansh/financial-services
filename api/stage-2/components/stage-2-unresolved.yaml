@@ -10,9 +10,9 @@ paths:
   /search:
     post:
       tags:
-        - ONDC Provider Platform
-        - ONDC Gateway
-      description: BAP declares the customer's intent to buy/avail products or services
+        - Provider Platform
+        - Gateway
+      description: Consumer Platform declares the customer's intent to buy/avail products or services
       requestBody:
         content:
           application/json:
@@ -30,8 +30,8 @@ paths:
   /select:
     post:
       tags:
-        - ONDC Provider Platform
-      description: BAP declares the customer's cart (or equivalent) created by selecting objects from the catalog
+        - Provider Platform
+      description: Consumer Platform declares the customer's cart (or equivalent) created by selecting objects from the catalog
       requestBody:
         content:
           application/json:
@@ -47,7 +47,7 @@ paths:
   /init:
     post:
       tags:
-        - ONDC Provider Platform
+        - Provider Platform
       description: Initialize an order by providing billing and/or shipping details
       requestBody:
         content:
@@ -64,7 +64,7 @@ paths:
   /confirm:
     post:
       tags:
-        - ONDC Provider Platform
+        - Provider Platform
       description: Initialize an order by providing billing and/or shipping details
       requestBody:
         content:
@@ -83,7 +83,7 @@ paths:
   /status:
     post:
       tags:
-        - ONDC Provider Platform
+        - Provider Platform
       description: Fetch the latest order object
       requestBody:
         content:
@@ -100,7 +100,7 @@ paths:
   # /track:
   #   post:
   #     tags:
-  #       - ONDC Provider Platform
+  #       - Provider Platform
   #     description: Track an active order
   #     requestBody:
   #       content:
@@ -113,7 +113,7 @@ paths:
   # /cancel:
   #   post:
   #     tags:
-  #       - ONDC Provider Platform
+  #       - Provider Platform
   #     description: Cancel an order
   #     requestBody:
   #       content:
@@ -127,7 +127,7 @@ paths:
   /update:
     post:
       tags:
-        - ONDC Provider Platform
+        - Provider Platform
       description: Remove object
       requestBody:
         content:
@@ -141,7 +141,7 @@ paths:
   /rating:
     post:
       tags:
-        - ONDC Provider Platform
+        - Provider Platform
       description: Provide feedback on a service
       requestBody:
         content:
@@ -155,7 +155,7 @@ paths:
   /support:
     post:
       tags:
-        - ONDC Provider Platform
+        - Provider Platform
       description: Contact support
       requestBody:
         content:
@@ -169,8 +169,8 @@ paths:
   /on_search:
     post:
       tags:
-        - ONDC Application Platform
-      description: BPP sends its catalog in response to a search request. 
+        - Consumer Platform
+      description: Provider Platform sends its catalog in response to a search request. 
       requestBody:
         content:
           application/json:
@@ -186,7 +186,7 @@ paths:
   /on_select:
     post:
       tags:
-        - ONDC Application Platform
+        - Consumer Platform
       description: Send draft order object with quoted price for selected items
       requestBody:
         content:
@@ -205,7 +205,7 @@ paths:
   /on_init:
     post:
       tags:
-        - ONDC Application Platform
+        - Consumer Platform
       description: Send order object with payment details updated
       requestBody:
         content:
@@ -224,7 +224,7 @@ paths:
   /on_confirm:
     post:
       tags:
-        - ONDC Application Platform
+        - Consumer Platform
       description: Send active order object
       requestBody:
         content:
@@ -241,7 +241,7 @@ paths:
   /on_track:
     post:
       tags:
-        - ONDC Application Platform
+        - Consumer Platform
       description: Send tracking details of an active order
       requestBody:
         content:
@@ -255,7 +255,7 @@ paths:
   /on_cancel:
     post:
       tags:
-        - ONDC Application Platform
+        - Consumer Platform
       description: Send cancellation request_id with reasons list in case of cancellation request. Else send cancelled order object
       requestBody:
         content:
@@ -272,7 +272,7 @@ paths:
   /on_update:
     post:
       tags:
-        - ONDC Application Platform
+        - Consumer Platform
       description: Returns updated service with updated runtime object
       requestBody:
         content:
@@ -286,7 +286,7 @@ paths:
   /on_status:
     post:
       tags:
-        - ONDC Application Platform
+        - Consumer Platform
       description: Fetch the status of a Service
       requestBody:
         content:
@@ -303,7 +303,7 @@ paths:
   /on_rating:
     post:
       tags:
-        - ONDC Application Platform
+        - Consumer Platform
       description: Provide feedback on a service
       requestBody:
         content:
@@ -317,7 +317,7 @@ paths:
   /on_support:
     post:
       tags:
-        - ONDC Application Platform
+        - Consumer Platform
       description: Contact Support
       requestBody:
         content:
@@ -334,7 +334,7 @@ components:
       type: apiKey
       in: header
       name: Authorization
-      description: 'Signature of message body using BAP or BPP subscriber''s signing public key. <br/><br/>Format:<br/><br/><code>Authorization : Signature keyId="{subscriber_id}|{unique_key_id}|{algorithm}",algorithm="ed25519",created="1606970629",expires="1607030629",headers="(created) (expires) digest",signature="Base64(signing string)"</code>'
+      description: 'Signature of message body using Consumer Platform or Provider Platform subscriber''s signing public key. <br/><br/>Format:<br/><br/><code>Authorization : Signature keyId="{subscriber_id}|{unique_key_id}|{algorithm}",algorithm="ed25519",created="1606970629",expires="1607030629",headers="(created) (expires) digest",signature="Base64(signing string)"</code>'
   schemas:
     $ref: "../../../beckn-core-protocol-specs/api/transaction/components/schema/index.yaml"
   x-enum:
