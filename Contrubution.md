@@ -22,12 +22,26 @@ To contribute to Project Name, follow the steps below to set up your development
 
 1. Install `swagger-cli` by running the following command:
 
+```
 npm install -g swagger-cli
+```
 
 
 This command will install the Swagger CLI globally on your machine.
 
-2. [Optional] If you haven't already, install the required programming languages, frameworks, and any additional tools necessary for the development of Project Name.
+## Generate the resolved OpenAPI definition file on-demand
+
+- Run the following command
+
+```
+./build_module {module_name}
+```
+
+- If the command runs successfully, you should see an output like this,
+
+```
+Created api/{module_name}/build/{module_name}.yaml from api/{module_name}/build/{module_name}.yaml
+```
 
 ### Forking the Repository
 
@@ -49,8 +63,9 @@ This command will install the Swagger CLI globally on your machine.
 
 5. Run the following command, replacing `<repository-url>` with the URL you copied in step 2:
 
+```
 git clone <repository-url>
-
+```
 
 The repository will be cloned to your local machine.
 
@@ -122,15 +137,17 @@ We welcome and encourage pull requests from the community. To submit a pull requ
 
 5. Pull the latest changes from the upstream repository to avoid conflicts:
 
+```
 git pull upstream main
-
+```
 
 6. Resolve any conflicts that arise from the above step.
 
 7. Push your branch to your forked repository:
 
+```
 git push origin your-branch-name
-
+```
 
 8. Visit the original repository on GitHub and switch to your newly pushed branch.
 
