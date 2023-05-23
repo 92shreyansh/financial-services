@@ -1,0 +1,4 @@
+search:
+  examples:
+    - $ref: './search/example_0.yaml'
+    - $ref: './search/example_1.yaml'

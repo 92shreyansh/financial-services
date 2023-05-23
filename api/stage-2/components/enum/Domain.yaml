@@ -1,4 +1,4 @@
-enum:
-  - TRV10 
-  - TRV11 
-  - TRV12 
+code:
+  - code: ONDC:TRV10
+    description: about the enum
+    reference: <PR/Issue/Discussion Links md format text>

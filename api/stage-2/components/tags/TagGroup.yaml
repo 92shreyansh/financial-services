@@ -1,0 +1,10 @@
+intent:
+  - tag: buyer_fee
+    code: BUYER_FEE
+    description: Description about the tags
+    reference: <PR/Issue/Discussion Links md format text>
+order:
+  - tag: buyer_fee
+    code: BUYER_FEE
+    description: Description about the tags
+    reference: <PR/Issue/Discussion Links md format text>

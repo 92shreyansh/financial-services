@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: ONDC Specification Stage 2
-  description: ONDC Specification Stage 2
+  title: ONDC Specification Stage 1
+  description: ONDC Specification Stage 1
   version: 1.0.0
 
 security:
@@ -17,12 +17,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref : "./io/index.yaml#/Search"
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/Search.yaml"
             examples:
               Example_0:
-                $ref: "./examples/search/example_0.yaml"
+                $ref: "./examples/base/search/example_0.yaml"
               Example_1:
-                $ref: "./examples/search/example_1.yaml"
+                $ref: "./examples/base/search/example_1.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -36,10 +36,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/Select"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Select.yaml"
             examples:
               Example_0:
-                $ref: "./examples/select/example_0.yaml"
+                $ref: "./examples/base/select/example_0.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -53,10 +53,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/Init"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Init.yaml"
             examples:
               Example_0:
-                $ref: "./examples/init/example_0.yaml"
+                $ref: "./examples/base/init/example_0.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -70,12 +70,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/Confirm"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Confirm.yaml"
             examples:
               Example_0:
-                $ref: "./examples/confirm/example_0.yaml"
+                $ref: "./examples/base/confirm/example_0.yaml"
               Example_1:
-                $ref: "./examples/confirm/example_1.yaml"
+                $ref: "./examples/base/confirm/example_1.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -89,40 +89,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/Status"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Status.yaml"
             examples:
               Example_0:
-                $ref: "./examples/status/example_0.yaml"
+                $ref: "./examples/base/status/example_0.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
 
-  # /track:
-  #   post:
-  #     tags:
-  #       - Provider Platform
-  #     description: Track an active order
-  #     requestBody:
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: "./io/index.yaml#/Track"
-  #     responses:
-  #       default:
-  #         $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
-  # /cancel:
-  #   post:
-  #     tags:
-  #       - Provider Platform
-  #     description: Cancel an order
-  #     requestBody:
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: "./io/index.yaml#/Cancel"
-  #     responses:
-  #       default:
-  #         $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
+  /track:
+    post:
+      tags:
+        - Provider Platform
+      description: Track an active order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Track.yaml"
+      responses:
+        default:
+          $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
+  /cancel:
+    post:
+      tags:
+        - Provider Platform
+      description: Cancel an order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Cancel.yaml"
+      responses:
+        default:
+          $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
 
   /update:
     post:
@@ -133,7 +133,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/Update"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Update.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -147,7 +147,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/Rating"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Rating.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -161,7 +161,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref : "./io/index.yaml#/Support"
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/Support.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -175,10 +175,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/OnSearch"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnSearch.yaml"
             examples:
               Example_0:
-                $ref: "./examples/on_search/example_0.yaml"
+                $ref: "./examples/base/on_search/example_0.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -192,12 +192,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref : "./io/index.yaml#/OnSelect"
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/OnSelect.yaml"
             examples:
               Example_0:
-                $ref: "./examples/on_select/example_0.yaml"
+                $ref: "./examples/base/on_select/example_0.yaml"
               Example_1:
-                $ref: "./examples/on_select/example_1.yaml"
+                $ref: "./examples/base/on_select/example_1.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -211,12 +211,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref : "./io/index.yaml#/OnInit"
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/OnInit.yaml"
             examples:
               Example_0:
-                $ref: "./examples/on_init/example_0.yaml"
+                $ref: "./examples/base/on_init/example_0.yaml"
               Example_1:
-                $ref: "./examples/on_init/example_1.yaml"
+                $ref: "./examples/base/on_init/example_1.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -230,10 +230,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref : "./io/index.yaml#/OnConfirm"
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/OnConfirm.yaml"
             examples:
               Example_0:
-                $ref: "./examples/on_confirm/example_0.yaml"
+                $ref: "./examples/base/on_confirm/example_0.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -247,7 +247,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref : "./io/index.yaml#/OnTrack"
+              $ref : "../../../beckn-core-protocol-specs/api/transaction/components/io/OnTrack.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -261,10 +261,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/OnCancel"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnCancel.yaml"
             examples:
               Example_0:
-                $ref: "./examples/on_cancel/example_0.yaml"
+                $ref: "./examples/base/on_cancel/example_0.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -278,7 +278,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/OnUpdate"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnUpdate.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -292,10 +292,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/OnStatus"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnStatus.yaml"
             examples:
               Example_0:
-                $ref: "./examples/on_status/example_0.yaml"
+                $ref: "./examples/base/on_status/example_0.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -309,7 +309,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/OnRating"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnRating.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
@@ -323,11 +323,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./io/index.yaml#/OnSupport"
+              $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/OnSupport.yaml"
       responses:
         default:
           $ref: "../../../beckn-core-protocol-specs/api/transaction/components/io/Response.yaml"
-
 components:
   securitySchemes:
     SubscriberAuth:
@@ -337,5 +336,3 @@ components:
       description: 'Signature of message body using Consumer Platform or Provider Platform subscriber''s signing public key. <br/><br/>Format:<br/><br/><code>Authorization : Signature keyId="{subscriber_id}|{unique_key_id}|{algorithm}",algorithm="ed25519",created="1606970629",expires="1607030629",headers="(created) (expires) digest",signature="Base64(signing string)"</code>'
   schemas:
     $ref: "../../../beckn-core-protocol-specs/api/transaction/components/schema/index.yaml"
-  x-enum:
-    $ref: "./enum/index.yaml"
