@@ -2,8 +2,6 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 
 const args = process.argv.slice(2);
-
-// const example_set = fs.readFileSync("./examples/index.yaml", 'utf8');
 var example_set = args[0]
 var baseYaml = args[1]
 var result = args[2]

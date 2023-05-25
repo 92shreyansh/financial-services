@@ -1,5 +1,5 @@
 template:
-  url: "./payload.json"
+  url: "./varient_template.yaml"
   dict:
     name: Farmhouse
     s_desc: Farm House Short Desciption
