@@ -1,0 +1,63 @@
+search:
+  examples:
+    - $ref: ./examples/mobility/search/example_0.yaml
+    - $ref: ./examples/mobility/search/example_1.yaml
+select:
+  examples:
+    - $ref: ./examples/mobility/select/example_0.yaml
+    - $ref: ./examples/mobility/select/example_1.yaml
+    - $ref: ./examples/mobility/select/example_2.yaml
+init:
+  examples:
+    - $ref: ./examples/mobility/init/example_0.yaml
+confirm:
+  examples:
+    - $ref: ./examples/mobility/confirm/example_0.yaml
+status:
+  examples:
+    - $ref: ./examples/mobility/search/example_0.yaml
+track:
+  examples:
+    - $ref: ./examples/mobility/track/example_0.yaml
+cancel:
+  examples:
+    - $ref: ./examples/mobility/cancel/example_0.yaml
+    - $ref: ./examples/mobility/cancel/example_1.yaml
+support:
+  examples:
+    - $ref: ./examples/mobility/support/example_0.yaml
+on_search:
+  examples:
+    - $ref: ./examples/mobility/on_search/example_0.yaml
+on_select:
+  examples:
+    - $ref: ./examples/mobility/on_select/example_0.yaml
+on_init:
+  examples:
+    - $ref: ./examples/mobility/on_init/example_0.yaml
+on_confirm:
+  examples:
+    - $ref: ./examples/mobility/on_confirm/example_0.yaml
+on_track:
+  examples:
+    - $ref: ./examples/mobility/on_track/example_0.yaml
+on_cancel:
+  examples:
+    - $ref: ./examples/mobility/on_cancel/example_0.yaml
+    - $ref: ./examples/mobility/on_cancel/example_1.yaml
+on_update:
+  examples:
+    - $ref: ./examples/mobility/on_update/example_0.yaml
+    - $ref: ./examples/mobility/on_update/example_1.yaml
+on_status:
+  examples:
+    - $ref: ./examples/mobility/on_status/example_0.yaml
+    - $ref: ./examples/mobility/on_status/example_1.yaml
+    - $ref: ./examples/mobility/on_status/example_2.yaml
+    - $ref: ./examples/mobility/on_status/example_3.yaml
+on_rating:
+  examples:
+    - $ref: ./examples/mobility/on_rating/example_0.yaml
+on_support:
+  examples:
+    - $ref: ./examples/mobility/on_support/example_0.yaml

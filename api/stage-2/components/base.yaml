@@ -1,0 +1,37 @@
+search:
+  examples:
+    - $ref: './examples/base/search/example_0.yaml'
+    - $ref: './examples/base/search/example_1.yaml'
+select:
+  examples:
+    - $ref: "./examples/base/select/example_0.yaml"
+init:
+  examples:
+    - $ref: ./examples/base/init/example_0.yaml
+confirm:
+  examples:
+    - $ref: ./examples/base/confirm/example_0.yaml
+    - $ref: ./examples/base/confirm/example_1.yaml
+status:
+  examples:
+    - $ref: ./examples/base/status/example_0.yaml
+on_search:
+  examples:
+    - $ref: ./examples/base/on_search/example_0.yaml
+on_select:
+  examples:
+    - $ref: ./examples/base/on_select/example_0.yaml
+    - $ref: ./examples/base/on_select/example_1.yaml
+on_init:
+  examples:
+    - $ref: ./examples/base/on_init/example_0.yaml
+    - $ref: ./examples/base/on_init/example_1.yaml
+on_confirm:
+  examples:
+    - $ref: ./examples/base/on_confirm/example_0.yaml
+on_cancel:
+  examples:
+    - $ref: ./examples/base/on_cancel/example_0.yaml
+on_status:
+  examples:
+    - $ref: ./examples/base/on_status/example_0.yaml

@@ -20,11 +20,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/Search.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/search/example_0.yaml
-              e1:
-                $ref: ./examples/mobility/search/example_1.yaml
       responses:
         default:
           $ref: >-
@@ -42,13 +37,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/Select.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/select/example_0.yaml
-              e1:
-                $ref: ./examples/mobility/select/example_1.yaml
-              e2:
-                $ref: ./examples/mobility/select/example_2.yaml
       responses:
         default:
           $ref: >-
@@ -64,9 +52,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/Init.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/init/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -82,9 +67,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/Confirm.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/confirm/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -100,9 +82,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/Status.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/search/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -118,9 +97,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/Track.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/track/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -136,11 +112,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/Cancel.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/cancel/example_0.yaml
-              e1:
-                $ref: ./examples/mobility/cancel/example_1.yaml
       responses:
         default:
           $ref: >-
@@ -186,9 +157,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/Support.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/support/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -204,9 +172,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnSearch.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_search/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -222,9 +187,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnSelect.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_select/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -240,9 +202,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnInit.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_init/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -258,9 +217,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnConfirm.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_confirm/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -276,9 +232,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnTrack.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_track/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -296,11 +249,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnCancel.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_cancel/example_0.yaml
-              e1:
-                $ref: ./examples/mobility/on_cancel/example_1.yaml
       responses:
         default:
           $ref: >-
@@ -316,11 +264,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnUpdate.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_update/example_0.yaml
-              e1:
-                $ref: ./examples/mobility/on_update/example_1.yaml
       responses:
         default:
           $ref: >-
@@ -336,15 +279,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnStatus.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_status/example_0.yaml
-              e1:
-                $ref: ./examples/mobility/on_status/example_1.yaml
-              e2:
-                $ref: ./examples/mobility/on_status/example_2.yaml
-              e3:
-                $ref: ./examples/mobility/on_status/example_3.yaml
       responses:
         default:
           $ref: >-
@@ -360,9 +294,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnRating.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_rating/example_0.yaml
       responses:
         default:
           $ref: >-
@@ -378,9 +309,6 @@ paths:
             schema:
               $ref: >-
                 ../../../beckn-core-protocol-specs/api/transaction/components/io/OnSupport.yaml
-            examples:
-              e0:
-                $ref: ./examples/mobility/on_support/example_0.yaml
       responses:
         default:
           $ref: >-
