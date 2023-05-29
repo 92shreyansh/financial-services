@@ -7,7 +7,6 @@
       .then(response => response.text())
       .then(yamlData => jsyaml.load(yamlData));
   }
-  
   // Example usage: fetch YAML data from a URL
   fetchData('https://raw.githubusercontent.com/92shreyansh/json-schema-store/v1.0.0/enum.yaml')
     .then(data => {

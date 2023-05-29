@@ -85,7 +85,30 @@
         </table>
       </section>
       <section class="section">
-        <!-- Content for the second right section -->
+        <table id="option-table">
+          <thead>
+            <tr>
+              <th>Schema</th>
+              <th>TagGroup</th>
+              <th>Tag</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>
+              <select id="tag-schema-dropdown" onchange="loadTagGroup()"></select>
+            </td>
+            <td>
+              <select id="tag-group-dropdown" onchange="loadTag()"></select>
+            </td>
+            <td>
+              <select id="tag-dropdown" onchange="displayTable()"></select>
+            </td>
+          </tr>
+        </table>
+        <table id="tag-group-table"></table>
+        </table>
+        <table id="tag-table"></table>
+        </table>
       </section>
     </div>
   </main>
@@ -97,5 +120,6 @@
 
   <script src="script.js"></script>
   <script src="script2.js"></script>
+  <script src="script3.js"></script>
 </body>
 </html>
