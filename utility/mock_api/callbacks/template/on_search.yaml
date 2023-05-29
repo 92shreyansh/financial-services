@@ -5,7 +5,6 @@ template:
     bpp_uri: http://localhost:3400/
     bpp_id: localhost:3400
     bpp_name: Test BPP Name
-
     city_code: 
       operation:
         type: READ
