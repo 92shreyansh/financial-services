@@ -12,4 +12,10 @@ path:
       $ref: "https://raw.githubusercontent.com/abhinavv245/Json-store/main/schemas/Retail/search.json"
     callbacks:
       $ref: "./callbacks/on_search.yaml"
+  # select:
+  #   schema:
+  #     $ref: "https://raw.githubusercontent.com/abhinavv245/Json-store/main/schemas/Retail/select.json"
+  #   callbacks:
+  #     $ref: "./callbacks/on_search.yaml"
+  
       

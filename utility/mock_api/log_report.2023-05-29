@@ -1,35 +1,6 @@
-2023-05-28T18:30:17.119Z [error]: AggregateError
-2023-05-28T18:30:21.464Z [info]: received a request from /search at Mon May 29 2023 00:00:21 GMT+0530 (India Standard Time)
-2023-05-28T18:32:22.605Z [error]: AggregateError
-2023-05-28T18:32:41.349Z [info]: This app is running on port number : 5500
-2023-05-28T18:32:48.550Z [info]: received a request from /search at Mon May 29 2023 00:02:48 GMT+0530 (India Standard Time)
-2023-05-28T18:32:53.383Z [error]: Request failed with status code 405
-2023-05-28T18:33:15.653Z [info]: received a request from /search at Mon May 29 2023 00:03:15 GMT+0530 (India Standard Time)
-2023-05-28T18:34:12.128Z [error]: Request failed with status code 405
-2023-05-28T18:34:13.854Z [info]: received a request from /search at Mon May 29 2023 00:04:13 GMT+0530 (India Standard Time)
-2023-05-28T18:34:33.798Z [info]: triggered http://localhost:3400/on_search at Mon May 29 2023 00:04:33 GMT+0530 (India Standard Time) and received [object Object]
-2023-05-29T04:45:02.365Z [info]: This app is running on port number : 5500
-2023-05-29T04:45:44.645Z [info]: This app is running on port number : 5500
-2023-05-29T04:45:52.499Z [info]: received a request from /search at Mon May 29 2023 10:15:52 GMT+0530 (India Standard Time)
-2023-05-29T04:46:18.867Z [info]: received a request from /search at Mon May 29 2023 10:16:18 GMT+0530 (India Standard Time)
-2023-05-29T04:46:29.345Z [info]: This app is running on port number : 5500
-2023-05-29T04:46:32.806Z [info]: received a request from /search at Mon May 29 2023 10:16:32 GMT+0530 (India Standard Time)
-2023-05-29T04:46:47.087Z [info]: received a request from /search at Mon May 29 2023 10:16:47 GMT+0530 (India Standard Time)
-2023-05-29T04:46:48.108Z [info]: received a request from /search at Mon May 29 2023 10:16:48 GMT+0530 (India Standard Time)
-2023-05-29T04:46:49.014Z [info]: received a request from /search at Mon May 29 2023 10:16:49 GMT+0530 (India Standard Time)
-2023-05-29T04:46:49.829Z [info]: received a request from /search at Mon May 29 2023 10:16:49 GMT+0530 (India Standard Time)
-2023-05-29T04:46:50.714Z [info]: received a request from /search at Mon May 29 2023 10:16:50 GMT+0530 (India Standard Time)
-2023-05-29T04:46:51.612Z [info]: received a request from /search at Mon May 29 2023 10:16:51 GMT+0530 (India Standard Time)
-2023-05-29T04:46:52.430Z [info]: received a request from /search at Mon May 29 2023 10:16:52 GMT+0530 (India Standard Time)
-2023-05-29T04:46:53.210Z [info]: received a request from /search at Mon May 29 2023 10:16:53 GMT+0530 (India Standard Time)
-2023-05-29T04:47:04.937Z [info]: received a request from /search at Mon May 29 2023 10:17:04 GMT+0530 (India Standard Time)
-2023-05-29T04:49:21.492Z [info]: This app is running on port number : 5500
-2023-05-29T04:49:25.538Z [info]: received a request from /search at Mon May 29 2023 10:19:25 GMT+0530 (India Standard Time)
-2023-05-29T04:49:29.863Z [info]: triggered http://localhost:3400/on_search at Mon May 29 2023 10:19:29 GMT+0530 (India Standard Time) and received [object Object]
-2023-05-29T05:07:14.702Z [info]: This app is running on port number : 5500
-2023-05-29T05:07:38.662Z [info]: This app is running on port number : 5500
-2023-05-29T05:09:06.926Z [info]: received a request from /search at Mon May 29 2023 10:39:06 GMT+0530 (India Standard Time)
-2023-05-29T05:09:41.335Z [info]: This app is running on port number : 5500
-2023-05-29T05:09:44.174Z [info]: received a request from /search at Mon May 29 2023 10:39:44 GMT+0530 (India Standard Time)
-2023-05-29T05:10:42.830Z [info]: This app is running on port number : 5500
-2023-05-29T05:10:46.156Z [info]: received a request from /search at Mon May 29 2023 10:40:46 GMT+0530 (India Standard Time)
+2023-05-29T06:01:17.127Z [info]: This app is running on port number : 5500
+2023-05-29T06:01:57.060Z [info]: This app is running on port number : 5500
+2023-05-29T06:02:10.083Z [info]: received a request from /search at Mon May 29 2023 11:32:10 GMT+0530 (India Standard Time)
+2023-05-29T06:02:21.575Z [info]: received a request from /search at Mon May 29 2023 11:32:21 GMT+0530 (India Standard Time)
+2023-05-29T06:02:23.275Z [info]: received a request from /search at Mon May 29 2023 11:32:23 GMT+0530 (India Standard Time)
+2023-05-29T06:02:32.040Z [info]: received a request from /search at Mon May 29 2023 11:32:32 GMT+0530 (India Standard Time)
