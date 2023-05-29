@@ -1,6 +1,6 @@
 const { buildTemplate } = require("../utils/utils");
-const ack = require("../payloads/ack.json");
-const nack = require("../payloads/nack.json");
+const ack = require("../callbacks/payloads/ack.json");
+const nack = require("../callbacks/payloads/nack.json");
 const logger = require("../utils/logger");
 const config = require("../utils/config");
 const { validateSchema } = require("./validation");

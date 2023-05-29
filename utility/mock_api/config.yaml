@@ -11,13 +11,5 @@ path:
     schema:
       $ref: "https://raw.githubusercontent.com/abhinavv245/Json-store/main/schemas/Retail/search.json"
     callbacks:
-      default:
-        callback: on_search
-        uri:
-          operation:
-            type: READ
-            input:
-              value: "req_body.context.bap_uri"
-        delay: 300
-        payload:
-          $ref: "./template/on_search.yaml"
+      $ref: "./callbacks/on_search.yaml"
+      
