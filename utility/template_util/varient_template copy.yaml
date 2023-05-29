@@ -1,5 +1,7 @@
 context:
   action: on_search
+  transaction_id: {{txn_id}}
+  message_id: {{msg_id}}
 message:
   catalog:
     bpp/descriptor:

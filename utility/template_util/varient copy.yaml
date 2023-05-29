@@ -1,7 +1,18 @@
 template:
   url: "./varient_template.yaml"
   dict:
-    name: Farmhouse
+    txn_id:
+      operation:
+        type: GENERATE_UUID
+    msg_id:
+      operation:
+        type: COPY
+        input:
+          operation:
+            type: READ
+            input:
+              value: "request.context.message_id"
+    name: Shreyansh
     s_desc: Farm House Short Desciption
     l_desc: Farm House Loooooooooong Description
     symbol_url: https://sellerNP.com/images/i1.png 

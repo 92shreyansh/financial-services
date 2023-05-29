@@ -12,27 +12,8 @@ path:
       $ref: "https://raw.githubusercontent.com/abhinavv245/Json-store/main/schemas/Retail/search.json"
     default:
       callback: on_search
-      uri:
-        operation:
-          type: READ
-          input:
-            value: "request.context.bap_id"
       delay: 300
       payload:
-        template:
-          url: "./varient_template.yaml"
-          dict:
-            txn_id:
-              operation:
-                type: GENERATE_UUID
-            msg_id:
-              operation:
-                type: COPY
-                input:
-                  operation:
-                    type: READ
-                    input:
-                      value: "request.context.message_id"
         template_url: ""
         template_map:
           - key: <Key of template>
