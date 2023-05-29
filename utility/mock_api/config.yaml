@@ -1,7 +1,7 @@
 server:
   type: BPP
   port: 5500
-  sync_mode: false
+  sync_mode: true
 log:
   level: DEBUG
   output_type: file

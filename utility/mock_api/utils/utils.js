@@ -18,8 +18,7 @@ const resolveTemplate = (context, template, values) => {
 }
 
 const buildTemplate = (context, templateConfig) => {
-  // TODO need http read dump
-  const template = fs.readFileSync(templateConfig.url, 'utf8');
+  const template = yaml.dump(templateConfig.data);
   const template_dict = templateConfig.dict;
   let response = resolveTemplate(context, template, template_dict);
   response = yaml.load(response)

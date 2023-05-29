@@ -1,14 +1,11 @@
 template:
-  url: "./payloads/on_search.yaml"
+  data:
+    $ref: "../payloads/on_search.yaml"
   dict:
     bpp_uri: http://localhost:3400/
     bpp_id: localhost:3400
     bpp_name: Test BPP Name
-    provider_name: Test Provider Name
-    number: 9513371096
-    item_id: 232332
-    item_name: Try some name
-    price: 2342
+
     city_code: 
       operation:
         type: READ
