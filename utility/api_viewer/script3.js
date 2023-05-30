@@ -72,9 +72,29 @@ function loadTag() {
     option.text = obj["code"];
     dropdown3.add(option);
   })
+  displayTagGroup()
 }
 
-function displayTable() {
+function displayTagGroup() {
+  var dropdown1 = document.getElementById('tag-schema-dropdown');
+  var dropdown2 = document.getElementById('tag-group-dropdown');
+
+  // Get the selected values from dropdown1, dropdown2
+  var selectedValue1 = dropdown1.value;
+  var selectedValue2 = dropdown2.value;
+  // Get the table data
+  let selectedObject2 = TagData[selectedValue1]["tags"].find(obj => {
+    if (obj["code"] === selectedValue2)
+    return obj
+  });
+  var tableBody = document.getElementById('tag-group-table');
+  if (tableBody && tableBody != {}) tableBody.innerHTML = '';
+  insertRow(tableBody, "Code", selectedObject2.code)
+  insertRow(tableBody, "Description", selectedObject2.description)
+  insertRow(tableBody, "Refrences", selectedObject2.reference)
+}
+
+function displayTag() {
   var dropdown1 = document.getElementById('tag-schema-dropdown');
   var dropdown2 = document.getElementById('tag-group-dropdown');
   var dropdown3 = document.getElementById('tag-dropdown');
@@ -82,24 +102,20 @@ function displayTable() {
   // Get the selected values from dropdown1, dropdown2, and dropdown3
   var selectedValue1 = dropdown1.value;
   var selectedValue2 = dropdown2.value;
-  var selectedValue3 = dropdown3.value;
-
-  console.log("selectedValue3", selectedValue3)
   // Get the table data
   let selectedObject2 = TagData[selectedValue1]["tags"].find(obj => {
     if (obj["code"] === selectedValue2)
-      return obj
+    return obj
   });
   let list = selectedObject2["list"]
+  var selectedValue3 = dropdown3.value;
+
+  console.log("selectedValue3", selectedValue3)
+
   var tableData = list.find(obj => {
     if (obj["code"] == selectedValue3)
       return obj
   });
-  var tableBody = document.getElementById('tag-group-table');
-  if (tableBody && tableBody != {}) tableBody.innerHTML = '';
-  insertRow(tableBody, "Code", selectedObject2.code)
-  insertRow(tableBody, "Description", selectedObject2.description)
-  insertRow(tableBody, "Refrences", selectedObject2.reference)
   // Get the table body element
   var tableBody = document.getElementById('tag-table');
   if (tableBody && tableBody != {}) tableBody.innerHTML = '';

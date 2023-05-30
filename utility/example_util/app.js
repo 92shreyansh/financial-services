@@ -2,38 +2,32 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 const $RefParser = require('json-schema-ref-parser');
 const { execSync } = require('child_process');
-const { promisify } = require('util');
 
 const args = process.argv.slice(2);
-var module_name = args[0];
-var example_set = args[1];
+var example_set = args[0];
 
-if (!fs.existsSync(`api/${module_name}`)) {
-  console.error('[ERROR] Module does not exist');
-  process.exit(1);
-}
-
-
-
-const tempPath = `api/${module_name}/components/temp.yaml`;
-const outputPath = `api/${module_name}/build/${module_name}.yaml`;
+const outputPath = `./build.yaml`;
 const unresolvedFilePath = `https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/components/index.yaml`
-// const spec = yaml.load(unresolvedFilePath);
+const tempPath = `./temp.yaml`;
 
-$RefParser.dereference(unresolvedFilePath)
-  .then((schema) => {
-    spec = schema;
-    return $RefParser.dereference(example_set)
-  })
-  .then((schema) => {
-    examples = schema;
-    GenerateYaml(spec, examples, tempPath);
-    buildSwagger(tempPath, outputPath);
-    cleanup()
-  })
-  .catch((error) => {
-    console.error('Error parsing schema:', error);
-  });
+getSwaggerYaml(example_set, outputPath);
+function getSwaggerYaml(example_set, outputPath){
+  $RefParser.dereference(unresolvedFilePath)
+    .then((schema) => {
+      spec = schema;
+      return $RefParser.dereference(example_set)
+    })
+    .then((schema) => {
+      examples = schema;
+      GenerateYaml(spec, examples, tempPath);
+      buildSwagger(tempPath, outputPath);
+      cleanup()
+    })
+    .catch((error) => {
+      console.error('Error parsing schema:', error);
+    });
+
+}
 
 function cleanup() {
   try {
