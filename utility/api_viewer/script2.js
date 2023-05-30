@@ -3,50 +3,50 @@
 // main.js
 
 function loadDropdown1() {
-var dropdown1 = document.getElementById('dropdown1');
-dropdown1.innerHTML = '';
+  var dropdown1 = document.getElementById('dropdown1');
+  dropdown1.innerHTML = '';
 
-// Populate dropdown1
-Object.keys(parsedData).forEach(function(key) {
-  var option = document.createElement('option');
-  option.text = key;
-  dropdown1.add(option);
-});
+  // Populate dropdown1
+  Object.keys(parsedData).forEach(function (key) {
+    var option = document.createElement('option');
+    option.text = key;
+    dropdown1.add(option);
+  });
 }
 
 function loadDropdown2() {
-var dropdown1 = document.getElementById('dropdown1');
-var dropdown2 = document.getElementById('dropdown2');
-dropdown2.innerHTML = '';
+  var dropdown1 = document.getElementById('dropdown1');
+  var dropdown2 = document.getElementById('dropdown2');
+  dropdown2.innerHTML = '';
 
-// Get the selected value from dropdown1
-var selectedValue1 = dropdown1.value;
+  // Get the selected value from dropdown1
+  var selectedValue1 = dropdown1.value;
 
-// Populate dropdown2
-Object.keys(parsedData[selectedValue1]).forEach(function(key) {
-  var option = document.createElement('option');
-  option.text = key;
-  dropdown2.add(option);
-});
+  // Populate dropdown2
+  Object.keys(parsedData[selectedValue1]).forEach(function (key) {
+    var option = document.createElement('option');
+    option.text = key;
+    dropdown2.add(option);
+  });
 }
 
 function loadDropdown3() {
-var dropdown1 = document.getElementById('dropdown1');
-var dropdown2 = document.getElementById('dropdown2');
-var dropdown3 = document.getElementById('dropdown3');
-dropdown3.innerHTML = '';
+  var dropdown1 = document.getElementById('dropdown1');
+  var dropdown2 = document.getElementById('dropdown2');
+  var dropdown3 = document.getElementById('dropdown3');
+  dropdown3.innerHTML = '';
 
-// Get the selected values from dropdown1 and dropdown2
-var selectedValue1 = dropdown1.value;
-var selectedValue2 = dropdown2.value;
+  // Get the selected values from dropdown1 and dropdown2
+  var selectedValue1 = dropdown1.value;
+  var selectedValue2 = dropdown2.value;
 
-// Populate dropdown3
-parsedData[selectedValue1][selectedValue2].forEach(function(item) {
-  var option = document.createElement('option');
-  option.text = item["value"];
-  console.log("iten added", item.value)
-  dropdown3.add(option);
-});
+  // Populate dropdown3
+  parsedData[selectedValue1][selectedValue2].forEach(function (item) {
+    var option = document.createElement('option');
+    option.text = item["value"];
+    console.log("iten added", item.value)
+    dropdown3.add(option);
+  });
 }
 
 function displayTable() {
@@ -62,21 +62,21 @@ function displayTable() {
   console.log("selectedValue3", selectedValue3)
   // Get the table data
   var tableData = parsedData[selectedValue1][selectedValue2].find(obj => {
-      if(obj["value"] == selectedValue3)
-          return obj
+    if (obj["value"] == selectedValue3)
+      return obj
   });
 
   // Get the table body element
   var tableBody = document.getElementById('result-table');
-  if(tableBody && tableBody != {})tableBody.innerHTML = '';
+  if (tableBody && tableBody != {}) tableBody.innerHTML = '';
   insertRow(tableBody, "ENUM", tableData.value)
   insertRow(tableBody, "Description", tableData.description)
   insertRow(tableBody, "Refrences", tableData.reference)
   insertRow(tableBody, "APIs", tableData.api)
-  
+
 }
 
-function insertRow(tableBody, key, value){
+function insertRow(tableBody, key, value) {
   var row = tableBody.insertRow();
   var cell = row.insertCell();
   cell.innerHTML = key
@@ -90,21 +90,28 @@ function fetchData(url) {
     .then(yamlData => jsyaml.load(yamlData));
 }
 
-// Example usage: fetch YAML data from a URL
-fetchData('https://raw.githubusercontent.com/92shreyansh/json-schema-store/v1.0.0/enum.yaml')
-  .then(data => {
+function loadTagYaml() {
+  var inputText = document.getElementById('swagger_url').value;
+  var result = inputText.toLowerCase();
+  populateEnums(result);
+}
+
+function populateEnums(url) {
+  // Example usage: fetch YAML data from a URL
+  fetchData(url).then(data => {
     console.log(data)
     parsedData = data
     loadDropdown1()
     loadDropdown2()
     loadDropdown3()
   })
-  .catch(error => {
-    console.error('Error fetching or parsing YAML:', error);
-  });
+    .catch(error => {
+      console.error('Error fetching or parsing YAML:', error);
+    });
+}
+
+populateEnums("https://raw.githubusercontent.com/92shreyansh/json-schema-store/v1.0.0/enum.yaml")
 
 
 
 
-    
-    
