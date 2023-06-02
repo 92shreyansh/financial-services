@@ -4,11 +4,12 @@ const $RefParser = require('json-schema-ref-parser');
 const { execSync } = require('child_process');
 
 const args = process.argv.slice(2);
-var example_set = args[0];
-var base_yaml = args[1];
+var base_yaml = args[0];
+var example_set = args[1];
+var outputPath = args[2]
 
-const outputPath = `./build.yaml`;
-const unresolvedFilePath = `https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/components/index.yaml`
+// const outputPath = `./build.yaml`;
+// const unresolvedFilePath = `https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/components/index.yaml`
 const tempPath = `./temp.yaml`;
 
 getSwaggerYaml(example_set, outputPath);

@@ -2,6 +2,8 @@
 
 // main.js
 
+var parsedData
+
 function loadDropdown1() {
   var dropdown1 = document.getElementById('dropdown1');
   dropdown1.innerHTML = '';
@@ -90,28 +92,34 @@ function fetchData(url) {
     .then(yamlData => jsyaml.load(yamlData));
 }
 
-function loadTagYaml() {
-  var inputText = document.getElementById('swagger_url').value;
-  var result = inputText.toLowerCase();
-  populateEnums(result);
-}
+// function loadTagYaml() {
+//   var inputText = document.getElementById('enum_url').value;
+//   var result = inputText.toLowerCase();
+//   populateEnums(result);
+// }
 
 function populateEnums(url) {
   // Example usage: fetch YAML data from a URL
   fetchData(url).then(data => {
     console.log(data)
-    parsedData = data
-    loadDropdown1()
-    loadDropdown2()
-    loadDropdown3()
+    initSchema(data["x-enum"])
+    initTag(data["x-tags"])
   })
     .catch(error => {
       console.error('Error fetching or parsing YAML:', error);
     });
 }
 
-populateEnums("https://raw.githubusercontent.com/92shreyansh/json-schema-store/v1.0.0/enum.yaml")
+function initSchema(data) {
+    parsedData = data
+    loadDropdown1()
+    loadDropdown2()
+    loadDropdown3()
+}
 
+// populateEnums("https://raw.githubusercontent.com/92shreyansh/json-schema-store/v1.0.0/enum.yaml")
+
+populateEnums("https://raw.githubusercontent.com/92shreyansh/mobility-specification/draft-1.x/api/mobility/build/build.yaml");
 
 
 
