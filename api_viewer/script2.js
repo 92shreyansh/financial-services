@@ -25,7 +25,8 @@ function loadDropdown2() {
   var selectedValue1 = dropdown1.value;
 
   // Populate dropdown2
-  Object.keys(parsedData[selectedValue1]).forEach(function (key) {
+  let data = flattenObject(parsedData[selectedValue1])
+  Object.keys(data).forEach(function (key) {
     var option = document.createElement('option');
     option.text = key;
     dropdown2.add(option);
@@ -43,13 +44,43 @@ function loadDropdown4() {
   var selectedValue2 = dropdown2.value;
 
   // Populate dropdown4
-  parsedData[selectedValue1][selectedValue2]["code"].forEach(function (item) {
+  let data = getAttribute(parsedData[selectedValue1], selectedValue2.split("."))
+  data.forEach(function (item) {
     var option = document.createElement('option');
     option.text = item["code"];
     console.log("iten added", item.code)
     dropdown4.add(option);
   });
   displayTable()
+}
+
+function getAttribute(data, keyArr) {
+  let key = isNaN(keyArr[0]) ? keyArr[0] : parseInt(keyArr[0]);
+  if (data[key] && data[key] != undefined) {
+    if (keyArr.length == 1) {
+      return data[key];
+    }
+    return this.getAttribute(data[key], keyArr.slice(1, keyArr.length));
+  }
+  return undefined;
+}
+
+function flattenObject(obj, prefix = '', result = {}) {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const newKey = prefix ? prefix + '.' + key : key;
+
+      if (Array.isArray(obj[key])) {
+        result[newKey] = obj[key];
+      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+        flattenObject(obj[key], newKey, result);
+      } else {
+        result[newKey] = obj[key];
+      }
+    }
+  }
+
+  return result;
 }
 
 function displayTable() {
@@ -64,7 +95,8 @@ function displayTable() {
 
   console.log("selectedValue3", selectedValue3)
   // Get the table data
-  var tableData = parsedData[selectedValue1][selectedValue2]["code"].find(obj => {
+  let data = getAttribute(parsedData[selectedValue1], selectedValue2.split("."))
+  var tableData = data.find(obj => {
     if (obj["code"] == selectedValue3)
       return obj
   });

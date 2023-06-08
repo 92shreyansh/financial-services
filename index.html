@@ -66,31 +66,41 @@
   </header>
   <main>
     <section class="left-section">
-      <input type="text" id="swagger_url" placeholder="Swagger_yaml_url">
-      <button onclick="loadSwaggerYaml()">Submit</button>
-      <input type="file" id="file-input" />
+      <table>
+        <tr>
+          <td><b>Load By Url</b></td>
+          <td>
+            <input type="text" id="swagger_url" placeholder="Swagger_yaml_url">
+            <button onclick="loadSwaggerYaml()">Submit</button>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Load By Local File</b></td>
+          <td>
+            <input type="file" id="file-input" />
+          </td>
+        </tr>
+      </table>
       <!-- Swagger UI -->
       <div id="swagger-ui"></div>
     </section>
     <div class="right-section">
       <section class="section">
-        <!-- <input type="text" id="enum_url" placeholder="enum_yaml_url">
-        <button onclick="loadEnumYaml()">Submit</button>  -->
         <table id="option-table">
-          <thead>
-            <tr>
-              <th>Schema</th>
-              <th>Field</th>
-              <th>Enum</th>
-            </tr>
-          </thead>
           <tr>
+            <td><b>API</b></td>
             <td>
               <select id="dropdown1" onchange="loadDropdown2()"></select>
             </td>
+          </tr>
+          <tr>
+            <td><b>Field</b></td>
             <td>
               <select id="dropdown2" onchange="loadDropdown4()"></select>
             </td>
+          </tr>
+          <tr>
+            <td><b>Enum</b></td>
             <td>
               <select id="dropdown4" onchange="displayTable()"></select>
             </td>
@@ -100,23 +110,27 @@
         </table>
       </section>
       <section class="section">
-        <!-- <input type="text" id="tag_url" placeholder="tag_yaml_url">
-        <button onclick="loadTagYaml()">Submit</button>  -->
         <table id="option-table">
-          <thead>
-            <tr>
-              <th>Schema</th>
-              <th>TagGroup</th>
-              <th>Tag</th>
-            </tr>
-          </thead>
           <tr>
+            <td><b>API</b></td>
             <td>
-              <select id="tag-schema-dropdown" onchange="loadTagGroup()"></select>
+              <select id="tag-schema-dropdown" onchange="loadTagPath()"></select>
             </td>
+          </tr>
+          <tr>
+            <td><b>Field</b></td>
+            <td>
+              <select id="tag-path-dropdown" onchange="loadTagGroup()"></select>
+            </td>
+          </tr>
+          <tr>
+            <td><b>TagGroup</b></td>
             <td>
               <select id="tag-group-dropdown" onchange="loadTag()"></select>
             </td>
+          </tr>
+          <tr>
+            <td><b>Tag</b></td>
             <td>
               <select id="tag-dropdown" onchange="displayTag()"></select>
             </td>
@@ -237,7 +251,8 @@
       var selectedValue1 = dropdown1.value;
 
       // Populate dropdown2
-      Object.keys(parsedData[selectedValue1]).forEach(function (key) {
+      let data = flattenObject(parsedData[selectedValue1])
+      Object.keys(data).forEach(function (key) {
         var option = document.createElement('option');
         option.text = key;
         dropdown2.add(option);
@@ -255,13 +270,43 @@
       var selectedValue2 = dropdown2.value;
 
       // Populate dropdown4
-      parsedData[selectedValue1][selectedValue2]["code"].forEach(function (item) {
+      let data = getAttribute(parsedData[selectedValue1], selectedValue2.split("."))
+      data.forEach(function (item) {
         var option = document.createElement('option');
         option.text = item["code"];
         console.log("iten added", item.code)
         dropdown4.add(option);
       });
       displayTable()
+    }
+
+    function getAttribute(data, keyArr) {
+      let key = isNaN(keyArr[0]) ? keyArr[0] : parseInt(keyArr[0]);
+      if (data[key] && data[key] != undefined) {
+        if (keyArr.length == 1) {
+          return data[key];
+        }
+        return this.getAttribute(data[key], keyArr.slice(1, keyArr.length));
+      }
+      return undefined;
+    }
+
+    function flattenObject(obj, prefix = '', result = {}) {
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          const newKey = prefix ? prefix + '.' + key : key;
+
+          if (Array.isArray(obj[key])) {
+            result[newKey] = obj[key];
+          } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+            flattenObject(obj[key], newKey, result);
+          } else {
+            result[newKey] = obj[key];
+          }
+        }
+      }
+
+      return result;
     }
 
     function displayTable() {
@@ -276,7 +321,8 @@
 
       console.log("selectedValue3", selectedValue3)
       // Get the table data
-      var tableData = parsedData[selectedValue1][selectedValue2]["code"].find(obj => {
+      let data = getAttribute(parsedData[selectedValue1], selectedValue2.split("."))
+      var tableData = data.find(obj => {
         if (obj["code"] == selectedValue3)
           return obj
       });
@@ -324,6 +370,9 @@
       loadDropdown4()
     }
 
+
+
+
     // Script3.js
 
     function fetchData(url) {
@@ -344,39 +393,61 @@
       });
     }
 
-    function loadTagGroup() {
+    function loadTagPath() {
       var dropdown1 = document.getElementById('tag-schema-dropdown');
-      var dropdown2 = document.getElementById('tag-group-dropdown');
+      var dropdown2 = document.getElementById('tag-path-dropdown');
       dropdown2.innerHTML = '';
 
       // Get the selected value from dropdown1
       var selectedValue1 = dropdown1.value;
 
       // Populate dropdown2
-      Object.keys(TagData[selectedValue1]["tags"]).forEach(function (key) {
+      let data = flattenObject(TagData[selectedValue1])
+      Object.keys(data).forEach(function (key) {
         var option = document.createElement('option');
-        option.text = TagData[selectedValue1]["tags"][key]["code"];
+        option.text = key;
         dropdown2.add(option);
+      });
+    }
+
+    function loadTagGroup() {
+      var dropdown1 = document.getElementById('tag-schema-dropdown');
+      var dropdown2 = document.getElementById('tag-path-dropdown');
+      var dropdown3 = document.getElementById('tag-group-dropdown');
+      dropdown3.innerHTML = '';
+
+      // Get the selected value from dropdown1
+      var selectedValue1 = dropdown1.value;
+      var selectedValue2 = dropdown2.value;
+
+      // Populate dropdown2
+      let data = getAttribute(TagData[selectedValue1], selectedValue2.split("."))
+      Object.keys(data).forEach(function (key) {
+        var option = document.createElement('option');
+        option.text = data[key]["code"];
+        dropdown3.add(option);
       });
     }
 
     function loadTag() {
       var dropdown1 = document.getElementById('tag-schema-dropdown');
-      var dropdown2 = document.getElementById('tag-group-dropdown');
+      var dropdown2 = document.getElementById('tag-path-dropdown');
+      var dropdown3 = document.getElementById('tag-group-dropdown');
       var dropdown4 = document.getElementById('tag-dropdown');
       dropdown4.innerHTML = '';
 
       // Get the selected values from dropdown1 and dropdown2
       var selectedValue1 = dropdown1.value;
       var selectedValue2 = dropdown2.value;
+      var selectedValue3 = dropdown3.value;
 
       // Populate dropdown4
-      let selectedObject2 = TagData[selectedValue1]["tags"].find(obj => {
-        if (obj["code"] === selectedValue2)
+      let data = getAttribute(TagData[selectedValue1], selectedValue2.split("."))
+      let selectedObject3 = data.find(obj => {
+        if (obj["code"] === selectedValue3)
           return obj
       });
-      console
-      let list = selectedObject2.list
+      let list = selectedObject3.list
       list.forEach(function (obj) {
         var option = document.createElement('option');
         option.text = obj["code"];
@@ -385,46 +456,81 @@
       displayTagGroup()
     }
 
+    function getAttribute(data, keyArr) {
+      let key = isNaN(keyArr[0]) ? keyArr[0] : parseInt(keyArr[0]);
+      if (data[key] && data[key] != undefined) {
+        if (keyArr.length == 1) {
+          return data[key];
+        }
+        return this.getAttribute(data[key], keyArr.slice(1, keyArr.length));
+      }
+      return undefined;
+    }
+
+    function flattenObject(obj, prefix = '', result = {}) {
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          const newKey = prefix ? prefix + '.' + key : key;
+
+          if (Array.isArray(obj[key])) {
+            result[newKey] = obj[key];
+          } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+            flattenObject(obj[key], newKey, result);
+          } else {
+            result[newKey] = obj[key];
+          }
+        }
+      }
+
+      return result;
+    }
+
     function displayTagGroup() {
       var dropdown1 = document.getElementById('tag-schema-dropdown');
-      var dropdown2 = document.getElementById('tag-group-dropdown');
+      var dropdown2 = document.getElementById('tag-path-dropdown');
+      var dropdown3 = document.getElementById('tag-group-dropdown');
 
       // Get the selected values from dropdown1, dropdown2
       var selectedValue1 = dropdown1.value;
       var selectedValue2 = dropdown2.value;
+      var selectedValue3 = dropdown3.value;
       // Get the table data
-      let selectedObject2 = TagData[selectedValue1]["tags"].find(obj => {
-        if (obj["code"] === selectedValue2)
+      let data = flattenObject(TagData[selectedValue1])
+      let selectedObject2 = data[selectedValue2]
+      let selectedObject3 = selectedObject2.find(obj => {
+        if (obj["code"] === selectedValue3)
           return obj
       });
       var tableBody = document.getElementById('tag-group-table');
       if (tableBody && tableBody != {}) tableBody.innerHTML = '';
-      insertRow(tableBody, "Code", selectedObject2.code)
-      insertRow(tableBody, "Description", selectedObject2.description)
-      insertRow(tableBody, "Refrences", selectedObject2.reference)
+      insertRow(tableBody, "Code", selectedObject3.code)
+      insertRow(tableBody, "Description", selectedObject3.description)
+      insertRow(tableBody, "Refrences", selectedObject3.reference)
       displayTag()
     }
 
     function displayTag() {
       var dropdown1 = document.getElementById('tag-schema-dropdown');
-      var dropdown2 = document.getElementById('tag-group-dropdown');
+      var dropdown2 = document.getElementById('tag-path-dropdown');
+      var dropdown3 = document.getElementById('tag-group-dropdown');
       var dropdown4 = document.getElementById('tag-dropdown');
 
       // Get the selected values from dropdown1, dropdown2, and dropdown4
       var selectedValue1 = dropdown1.value;
       var selectedValue2 = dropdown2.value;
+      var selectedValue3 = dropdown3.value;
+      var selectedValue4 = dropdown4.value;
       // Get the table data
-      let selectedObject2 = TagData[selectedValue1]["tags"].find(obj => {
-        if (obj["code"] === selectedValue2)
+      let data = flattenObject(TagData[selectedValue1])
+      let selectedObject2 = data[selectedValue2]
+      let selectedObject3 = selectedObject2.find(obj => {
+        if (obj["code"] === selectedValue3)
           return obj
       });
-      let list = selectedObject2["list"]
-      var selectedValue3 = dropdown4.value;
-
-      console.log("selectedValue3", selectedValue3)
+      let list = selectedObject3["list"]
 
       var tableData = list.find(obj => {
-        if (obj["code"] == selectedValue3)
+        if (obj["code"] == selectedValue4)
           return obj
       });
       // Get the table body element
@@ -464,9 +570,13 @@
     function initTag(data) {
       TagData = data
       loadTagSchema()
+      loadTagPath()
       loadTagGroup()
       loadTag()
     }
+
+
+
 
   </script>
 
