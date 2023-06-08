@@ -54,4 +54,5 @@ const formatted_error = (errors) => {
 module.exports = {
   resolveTemplate,
   buildTemplate,
+  formatted_error
 };

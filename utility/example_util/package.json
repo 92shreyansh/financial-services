@@ -1,7 +1,7 @@
 {
-  "name": "example_util",
+  "name": "build_util",
   "version": "1.0.0",
-  "description": "",
+  "description": "ondc sopecification build utility",
   "main": "app.js",
   "bin": {
     "example_util": "app.js"

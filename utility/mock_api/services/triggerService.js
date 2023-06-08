@@ -3,7 +3,6 @@ const logger = require("../utils/logger");
 const axios= require('axios')
 
 //getting path object from config file
-const paths = config.getPaths();
 
 const trigger = (context, config ,data) => {
   let uri = context.response_uri

@@ -1,4 +1,4 @@
-const { getSchema, formatted_error } = require("../utils/utils");
+const { formatted_error } = require("../utils/utils");
 const Ajv = require("ajv");
 const ajv = new Ajv({
   allErrors: true,

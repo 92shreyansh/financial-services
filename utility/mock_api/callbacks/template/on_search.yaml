@@ -6,30 +6,15 @@ template:
     bpp_id: localhost:3400
     bpp_name: Test BPP Name
     city_code: 
-      operation:
-        type: READ
-        input:
-          value: "req_body.context.city"
+      $ref: "../operations/req_body.yaml#/context_city"
     bap_id:
-      operation:
-        type: READ
-        input:
-          value: "req_body.context.bap_id"
+      $ref: "../operations/req_body.yaml#/bap_id"
     bap_uri:
-      operation:
-        type: READ
-        input:
-          value: "req_body.context.bap_uri"
+      $ref: "../operations/req_body.yaml#/bap_uri"
     txn_id:
-      operation:
-        type: READ
-        input:
-          value: "req_body.context.transaction_id"
+      $ref: "../operations/req_body.yaml#/transaction_id"
     msg_id:
-      operation:
-        type: READ
-        input:
-          value: "req_body.context.message_id"
+      $ref: "../operations/req_body.yaml#/message_id"
     timestamp:
       operation:
         type: GENERATE_TIMESTAMP
