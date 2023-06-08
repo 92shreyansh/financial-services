@@ -25,7 +25,7 @@ function loadDropdown2() {
   var selectedValue1 = dropdown1.value;
 
   // Populate dropdown2
-  Object.keys(parsedData[selectedValue1][selectedValue1]).forEach(function (key) {
+  Object.keys(parsedData[selectedValue1]).forEach(function (key) {
     var option = document.createElement('option');
     option.text = key;
     dropdown2.add(option);
@@ -43,7 +43,7 @@ function loadDropdown4() {
   var selectedValue2 = dropdown2.value;
 
   // Populate dropdown4
-  parsedData[selectedValue1][selectedValue1][selectedValue2].forEach(function (item) {
+  parsedData[selectedValue1][selectedValue2]["code"].forEach(function (item) {
     var option = document.createElement('option');
     option.text = item["code"];
     console.log("iten added", item.code)
@@ -64,7 +64,7 @@ function displayTable() {
 
   console.log("selectedValue3", selectedValue3)
   // Get the table data
-  var tableData = parsedData[selectedValue1][selectedValue1][selectedValue2].find(obj => {
+  var tableData = parsedData[selectedValue1][selectedValue2]["code"].find(obj => {
     if (obj["code"] == selectedValue3)
       return obj
   });

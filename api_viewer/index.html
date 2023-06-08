@@ -66,8 +66,8 @@
   </header>
   <main>
     <section class="left-section">
-      <input type="text" id="swagger_url" placeholder="Swagger_yaml_url">
-      <button onclick="loadSwaggerYaml()">Submit</button>
+      <!-- <input type="text" id="swagger_url" placeholder="Swagger_yaml_url">
+      <button onclick="loadSwaggerYaml()">Submit</button> -->
       <input type="file" id="file-input" />
       <!-- Swagger UI -->
       <div id="swagger-ui"></div>
@@ -190,7 +190,6 @@
       var inputText = document.getElementById('swagger_url').value;
       var result = inputText.toLowerCase();
       loadSwaggerUI(result)
-      populateEnums(result);
     }
 
     function display(result) {
