@@ -5,8 +5,9 @@ const { execSync } = require('child_process');
 
 const args = process.argv.slice(2);
 var example_set = args[0]
+var flow_set = args[1]
 var base_yaml = "./beckn_yaml.yaml"//args[0]; 
-var example_yaml = "./examples/index.yaml"//args[1];
+var example_yaml = "./index.yaml"//args[1];
 var outputPath = "../build/build.yaml"
 
 // const outputPath = `./build.yaml`;
@@ -19,10 +20,13 @@ function getSwaggerYaml(example_set, outputPath){
 
   $RefParser.dereference(example_yaml)
     .then((schema) => {
-      examples = schema[example_set];
+      let examples = schema["examples"]
+      examples = examples[example_set];
       buildSwagger(base_yaml, tempPath);
       var spec_file = fs.readFileSync(tempPath)
       var spec = yaml.load(spec_file)
+      addEnumTag(spec, schema)
+
       GenerateYaml(spec, examples, outputPath);
       cleanup()
     })
@@ -51,6 +55,12 @@ function buildSwagger(inPath, outPath) {
   }
 }
 
+function addEnumTag(base, layer) {
+  base["x-enum"] = layer["enum"]
+  base["x-tags"] = layer["tags"]
+  base["x-flows"] = layer["flows"][flow_set]
+}
+
 function GenerateYaml(base, layer, output_yaml) {
   let examples = layer
   for (var key in examples) {
@@ -60,8 +70,6 @@ function GenerateYaml(base, layer, output_yaml) {
       base["paths"]["/" + key]["post"]["requestBody"]["content"]["application/json"]["examples"]["e" + key2] = list[key2];
     }
   }
-  base["x-enum"] = layer["enum"]
-  base["x-tags"] = layer["tags"]
   const output = yaml.dump(base);
   fs.writeFileSync(output_yaml, output, 'utf8');
 }
