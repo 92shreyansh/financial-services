@@ -1,6 +1,6 @@
 
 
-// Script3.js
+// tag.js
 
 function fetchData(url) {
   return fetch(url)

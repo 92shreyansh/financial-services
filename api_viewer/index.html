@@ -6,9 +6,12 @@
   <title>ONDC API Contract</title>
   <style>
     body {
+      display: flex;
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      height: 100vh;
+      flex-direction: column;
     }
 
     header {
@@ -16,44 +19,121 @@
       color: #fff;
       padding: 20px;
       text-align: center;
+      height: 10%;
     }
 
     main {
+      height: 80%;
       display: flex;
-      height: 100vh;
     }
 
+    .select-file {
+      height: 10%;
+    }
+    
     .left-section {
       width: 67%;
-      overflow-y: scroll;
+      overflow: scroll;
       padding: 20px;
     }
-
+    
     .right-section {
       width: 33%;
       display: flex;
       flex-direction: column;
     }
-
+    
     .section {
       flex: 1;
       padding: 20px;
     }
-
+    
     .dropdown {
       display: flex;
       flex-direction: column;
       margin-bottom: 10px;
     }
-
+    
     .dropdown label {
       font-weight: bold;
       margin-bottom: 5px;
     }
-
+    
     .display-section {
       margin-top: 20px;
     }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      height: inherit;
+    }
+
+    .flows-panel {
+      width: 15%;
+      display: flex;
+      flex-direction: column;
+      background-color: #a1a1a1;
+      overflow: scroll;
+    }
+    
+    .flows-panel ul {
+      list-style-type: disc;
+      padding: 0;
+      margin: 0;
+    }
+
+    .flows-panel li {
+      margin-bottom: 5px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+
+    .flows-panel li.active {
+      font-weight: bold;
+    }
+
+    .steps-panel {
+      width: 15%;
+      display: flex;
+      flex-direction: column;
+      background-color: #f1f1f1;
+    }
+
+    .steps-panel ul {
+      list-style-type: upper-roman;
+      padding: 0;
+      margin: 0;
+    }
+
+    .steps-panel li {
+      margin-bottom: 5px;
+      height: 60px;
+      cursor: pointer;
+    }
+
+
+    .steps-panel li.active {
+      font-weight: bold;
+    }
+
+    .content-panel {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      background-color: #ffffff;
+    }
+    .flow-content-section {
+      flex: 1;
+      overflow: auto;
+    }
+    .tab {
+      display: none;
+    }
+
+
   </style>
   <!-- Swagger UI CSS -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.52.0/swagger-ui.css">
@@ -64,25 +144,55 @@
   <header>
     <h1>ONDC API Contract</h1>
   </header>
+  <div class="select-file">
+    <table>
+      <tr>
+        <td><b>Load By Url</b></td>
+        <td>
+          <input type="text" id="swagger_url" placeholder="Swagger_yaml_url">
+          <button onclick="loadSwaggerYaml()">Submit</button>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Load By Local File</b></td>
+        <td>
+          <input type="file" id="file-input" />
+        </td>
+      </tr>
+    </table>
+    <div class="tabs">
+      <button class="tab-button" onclick="openTab(event, 'swagger-tab')">Swagger</button>
+      <button class="tab-button" onclick="openTab(event, 'flow-tab')">Flow</button>
+    </div>
+  </div>
   <main>
     <section class="left-section">
-      <table>
-        <tr>
-          <td><b>Load By Url</b></td>
-          <td>
-            <input type="text" id="swagger_url" placeholder="Swagger_yaml_url">
-            <button onclick="loadSwaggerYaml()">Submit</button>
-          </td>
-        </tr>
-        <tr>
-          <td><b>Load By Local File</b></td>
-          <td>
-            <input type="file" id="file-input" />
-          </td>
-        </tr>
-      </table>
       <!-- Swagger UI -->
-      <div id="swagger-ui"></div>
+      <div id="swagger-tab" class="tab">
+        <div id="swagger-ui"></div>
+      </div>
+      <div id="flow-tab" class="tab">
+        <div id="flow">
+          <div class="container">
+            <div class="flows-panel">
+              <h2>Flows:</h2>
+              <ul id="flows-list"></ul>
+            </div>
+            <div class="steps-panel">
+              <h2 id="flow-summary"></h2>
+              <p id="flow-description"></p>
+              <h3>Steps:</h2>
+              <ul id="steps-list"></ul>
+            </div>
+            <div class="content-panel">
+              <h2 id="step-summary"></h2>
+              <p id="step-description"></p>
+              <h2>Example:</h2>
+              <pre id="yaml-content" class="flow-content-section"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <div class="right-section">
       <section class="section">
@@ -148,341 +258,14 @@
   <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.52.0/swagger-ui-standalone-preset.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 
-
-  <script src="script.js"></script>
-  <script src="script2.js"></script>
-  <script src="script3.js"></script>
+  <script src="tabs.js"></script>
+  <script src="swagger.js"></script>
+  <script src="enum.js"></script>
+  <script src="tag.js"></script>
+  <script src="flow.js"></script>
 
   <!--
-  <script>
-    // script.js
 
-    // script.js
-    // window.onload = function () {
-    //   // let url = Math.random() < 0.5?"https://raw.githubusercontent.com/beckn/mobility/main/api/mobility.yaml":"https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/build/transaction.yaml"
-    //   let url = "https://raw.githubusercontent.com/tanya-ondc/B2B-1.5/main/api/build/B2Bv2.0.1.yaml"
-    //   //"https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/build/transaction.yaml"
-    //   loadSwaggerUI(url)
-    //   populateEnums(url);
-    // }
-
-    window.onload = function () {
-      // let url = "https://raw.githubusercontent.com/tanya-ondc/B2B-1.5/main/api/build/B2Bv2.0.1.yaml"
-      document.getElementById('file-input').addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          const openApiYaml = event.target.result;
-          loadSwaggerUIFile(openApiYaml)
-          let data = jsyaml.load(openApiYaml)
-          initSchema(data["x-enum"])
-          initTag(data["x-tags"])
-        };
-
-        reader.readAsText(file);
-      });
-      // loadSwaggerUI(url)
-      // populateEnums(url);
-    }
-
-
-
-    function loadSwaggerUIFile(openApiYaml) {
-      const ui = SwaggerUIBundle({
-        spec: jsyaml.load(openApiYaml),
-        dom_id: '#swagger-ui',
-        presets: [
-          SwaggerUIBundle.presets.apis,
-          SwaggerUIStandalonePreset
-        ],
-        layout: "BaseLayout",
-        deepLinking: true
-      });
-      window.ui = ui;
-    };
-
-    function loadSwaggerYaml() {
-      var inputText = document.getElementById('swagger_url').value;
-      var result = inputText.toLowerCase();
-      loadSwaggerUI(result)
-    }
-
-    function display(result) {
-      document.getElementById('output').innerText = result;
-    }
-
-    function loadSwaggerUI(url) {
-      const ui = SwaggerUIBundle({
-        url: url,
-        dom_id: '#swagger-ui',
-        presets: [
-          SwaggerUIBundle.presets.apis,
-          SwaggerUIStandalonePreset
-        ],
-        layout: "BaseLayout",
-        deepLinking: true
-      });
-      window.ui = ui
-    };
-
-
-    // script2.js
-
-    var parsedData
-
-    function loadDropdown1() {
-      var dropdown1 = document.getElementById('dropdown1');
-      dropdown1.innerHTML = '';
-
-      // Populate dropdown1
-      Object.keys(parsedData).forEach(function (key) {
-        var option = document.createElement('option');
-        option.text = key;
-        dropdown1.add(option);
-      });
-    }
-
-    function loadDropdown2() {
-      var dropdown1 = document.getElementById('dropdown1');
-      var dropdown2 = document.getElementById('dropdown2');
-      dropdown2.innerHTML = '';
-
-      // Get the selected value from dropdown1
-      var selectedValue1 = dropdown1.value;
-
-      // Populate dropdown2
-      Object.keys(parsedData[selectedValue1]).forEach(function (key) {
-        var option = document.createElement('option');
-        option.text = key;
-        dropdown2.add(option);
-      });
-    }
-
-    function loadDropdown4() {
-      var dropdown1 = document.getElementById('dropdown1');
-      var dropdown2 = document.getElementById('dropdown2');
-      var dropdown4 = document.getElementById('dropdown4');
-      dropdown4.innerHTML = '';
-
-      // Get the selected values from dropdown1 and dropdown2
-      var selectedValue1 = dropdown1.value;
-      var selectedValue2 = dropdown2.value;
-
-      // Populate dropdown4
-      parsedData[selectedValue1][selectedValue2]["code"].forEach(function (item) {
-        var option = document.createElement('option');
-        option.text = item["code"];
-        console.log("iten added", item.code)
-        dropdown4.add(option);
-      });
-      displayTable()
-    }
-
-    function displayTable() {
-      var dropdown1 = document.getElementById('dropdown1');
-      var dropdown2 = document.getElementById('dropdown2');
-      var dropdown4 = document.getElementById('dropdown4');
-
-      // Get the selected values from dropdown1, dropdown2, and dropdown4
-      var selectedValue1 = dropdown1.value;
-      var selectedValue2 = dropdown2.value;
-      var selectedValue3 = dropdown4.value;
-
-      console.log("selectedValue3", selectedValue3)
-      // Get the table data
-      var tableData = parsedData[selectedValue1][selectedValue2]["code"].find(obj => {
-        if (obj["code"] == selectedValue3)
-          return obj
-      });
-
-      // Get the table body element
-      var tableBody = document.getElementById('result-table');
-      if (tableBody && tableBody != {}) tableBody.innerHTML = '';
-      insertRow(tableBody, "ENUM", tableData.code)
-      insertRow(tableBody, "Description", tableData.description)
-      insertRow(tableBody, "Refrences", tableData.reference)
-      // insertRow(tableBody, "APIs", tableData.api)
-
-    }
-
-    function insertRow(tableBody, key, value) {
-      var row = tableBody.insertRow();
-      var cell = row.insertCell();
-      cell.innerHTML = key
-      var cell = row.insertCell();
-      cell.innerHTML = value;
-    }
-
-    function fetchData(url) {
-      return fetch(url)
-        .then(response => response.text())
-        .then(yamlData => jsyaml.load(yamlData));
-    }
-
-    function populateEnums(url) {
-      // Example usage: fetch YAML data from a URL
-      fetchData(url).then(data => {
-        console.log(data)
-        initSchema(data["x-enum"])
-        initTag(data["x-tags"])
-      })
-        .catch(error => {
-          console.error('Error fetching or parsing YAML:', error);
-        });
-    }
-
-    function initSchema(data) {
-      parsedData = data
-      loadDropdown1()
-      loadDropdown2()
-      loadDropdown4()
-    }
-
-    // Script3.js
-
-    function fetchData(url) {
-      return fetch(url)
-        .then(response => response.text())
-        .then(yamlData => jsyaml.load(yamlData));
-    }
-
-    function loadTagSchema() {
-      var dropdown1 = document.getElementById('tag-schema-dropdown');
-      dropdown1.innerHTML = '';
-
-      // Populate dropdown1
-      Object.keys(TagData).forEach(function (key) {
-        var option = document.createElement('option');
-        option.text = key;
-        dropdown1.add(option);
-      });
-    }
-
-    function loadTagGroup() {
-      var dropdown1 = document.getElementById('tag-schema-dropdown');
-      var dropdown2 = document.getElementById('tag-group-dropdown');
-      dropdown2.innerHTML = '';
-
-      // Get the selected value from dropdown1
-      var selectedValue1 = dropdown1.value;
-
-      // Populate dropdown2
-      Object.keys(TagData[selectedValue1]["tags"]).forEach(function (key) {
-        var option = document.createElement('option');
-        option.text = TagData[selectedValue1]["tags"][key]["code"];
-        dropdown2.add(option);
-      });
-    }
-
-    function loadTag() {
-      var dropdown1 = document.getElementById('tag-schema-dropdown');
-      var dropdown2 = document.getElementById('tag-group-dropdown');
-      var dropdown4 = document.getElementById('tag-dropdown');
-      dropdown4.innerHTML = '';
-
-      // Get the selected values from dropdown1 and dropdown2
-      var selectedValue1 = dropdown1.value;
-      var selectedValue2 = dropdown2.value;
-
-      // Populate dropdown4
-      let selectedObject2 = TagData[selectedValue1]["tags"].find(obj => {
-        if (obj["code"] === selectedValue2)
-          return obj
-      });
-      console
-      let list = selectedObject2.list
-      list.forEach(function (obj) {
-        var option = document.createElement('option');
-        option.text = obj["code"];
-        dropdown4.add(option);
-      })
-      displayTagGroup()
-    }
-
-    function displayTagGroup() {
-      var dropdown1 = document.getElementById('tag-schema-dropdown');
-      var dropdown2 = document.getElementById('tag-group-dropdown');
-
-      // Get the selected values from dropdown1, dropdown2
-      var selectedValue1 = dropdown1.value;
-      var selectedValue2 = dropdown2.value;
-      // Get the table data
-      let selectedObject2 = TagData[selectedValue1]["tags"].find(obj => {
-        if (obj["code"] === selectedValue2)
-          return obj
-      });
-      var tableBody = document.getElementById('tag-group-table');
-      if (tableBody && tableBody != {}) tableBody.innerHTML = '';
-      insertRow(tableBody, "Code", selectedObject2.code)
-      insertRow(tableBody, "Description", selectedObject2.description)
-      insertRow(tableBody, "Refrences", selectedObject2.reference)
-      displayTag()
-    }
-
-    function displayTag() {
-      var dropdown1 = document.getElementById('tag-schema-dropdown');
-      var dropdown2 = document.getElementById('tag-group-dropdown');
-      var dropdown4 = document.getElementById('tag-dropdown');
-
-      // Get the selected values from dropdown1, dropdown2, and dropdown4
-      var selectedValue1 = dropdown1.value;
-      var selectedValue2 = dropdown2.value;
-      // Get the table data
-      let selectedObject2 = TagData[selectedValue1]["tags"].find(obj => {
-        if (obj["code"] === selectedValue2)
-          return obj
-      });
-      let list = selectedObject2["list"]
-      var selectedValue3 = dropdown4.value;
-
-      console.log("selectedValue3", selectedValue3)
-
-      var tableData = list.find(obj => {
-        if (obj["code"] == selectedValue3)
-          return obj
-      });
-      // Get the table body element
-      var tableBody = document.getElementById('tag-table');
-      if (tableBody && tableBody != {}) tableBody.innerHTML = '';
-      insertRow(tableBody, "Code", tableData.code)
-      insertRow(tableBody, "Description", tableData.description)
-      insertRow(tableBody, "Refrences", tableData.reference)
-
-    }
-
-    function insertRow(tableBody, key, value) {
-      var row = tableBody.insertRow();
-      var cell = row.insertCell();
-      cell.innerHTML = key
-      var cell = row.insertCell();
-      cell.innerHTML = value;
-    }
-
-    function fetchTag() {
-      var inputText = document.getElementById('tag_url').value;
-      var result = inputText.toLowerCase();
-      populateTags(result);
-    }
-
-    function populateTags(url) {
-      // Example usage: fetch YAML data from a URL
-      fetchData(url).then(data => {
-        console.log(data)
-        initTag(data)
-      })
-        .catch(error => {
-          console.error('Error fetching or parsing YAML:', error);
-        });
-    }
-
-    function initTag(data) {
-      TagData = data
-      loadTagSchema()
-      loadTagGroup()
-      loadTag()
-    }
-
-  </script>
 -->
 
 </body>

@@ -1,6 +1,5 @@
 
-
-// script2.js
+// enums.js
 
 var parsedData
 

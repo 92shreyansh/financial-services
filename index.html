@@ -6,9 +6,12 @@
   <title>ONDC API Contract</title>
   <style>
     body {
+      display: flex;
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      height: 100vh;
+      flex-direction: column;
     }
 
     header {
@@ -16,16 +19,21 @@
       color: #fff;
       padding: 20px;
       text-align: center;
+      height: 10%;
     }
 
     main {
+      height: 80%;
       display: flex;
-      height: 100vh;
+    }
+
+    .select-file {
+      height: 10%;
     }
 
     .left-section {
       width: 67%;
-      overflow-y: scroll;
+      overflow: scroll;
       padding: 20px;
     }
 
@@ -54,6 +62,78 @@
     .display-section {
       margin-top: 20px;
     }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      height: inherit;
+    }
+
+    .flows-panel {
+      width: 15%;
+      display: flex;
+      flex-direction: column;
+      background-color: #a1a1a1;
+      overflow: scroll;
+    }
+
+    .flows-panel ul {
+      list-style-type: disc;
+      padding: 0;
+      margin: 0;
+    }
+
+    .flows-panel li {
+      margin-bottom: 5px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+
+    .flows-panel li.active {
+      font-weight: bold;
+    }
+
+    .steps-panel {
+      width: 15%;
+      display: flex;
+      flex-direction: column;
+      background-color: #f1f1f1;
+    }
+
+    .steps-panel ul {
+      list-style-type: upper-roman;
+      padding: 0;
+      margin: 0;
+    }
+
+    .steps-panel li {
+      margin-bottom: 5px;
+      height: 60px;
+      cursor: pointer;
+    }
+
+
+    .steps-panel li.active {
+      font-weight: bold;
+    }
+
+    .content-panel {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      background-color: #ffffff;
+    }
+
+    .flow-content-section {
+      flex: 1;
+      overflow: auto;
+    }
+
+    .tab {
+      display: none;
+    }
   </style>
   <!-- Swagger UI CSS -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.52.0/swagger-ui.css">
@@ -64,25 +144,55 @@
   <header>
     <h1>ONDC API Contract</h1>
   </header>
+  <div class="select-file">
+    <table>
+      <tr>
+        <td><b>Load By Url</b></td>
+        <td>
+          <input type="text" id="swagger_url" placeholder="Swagger_yaml_url">
+          <button onclick="loadSwaggerYaml()">Submit</button>
+        </td>
+      </tr>
+      <tr>
+        <td><b>Load By Local File</b></td>
+        <td>
+          <input type="file" id="file-input" />
+        </td>
+      </tr>
+    </table>
+    <div class="tabs">
+      <button class="tab-button" onclick="openTab(event, 'swagger-tab')">Swagger</button>
+      <button class="tab-button" onclick="openTab(event, 'flow-tab')">Flow</button>
+    </div>
+  </div>
   <main>
     <section class="left-section">
-      <table>
-        <tr>
-          <td><b>Load By Url</b></td>
-          <td>
-            <input type="text" id="swagger_url" placeholder="Swagger_yaml_url">
-            <button onclick="loadSwaggerYaml()">Submit</button>
-          </td>
-        </tr>
-        <tr>
-          <td><b>Load By Local File</b></td>
-          <td>
-            <input type="file" id="file-input" />
-          </td>
-        </tr>
-      </table>
       <!-- Swagger UI -->
-      <div id="swagger-ui"></div>
+      <div id="swagger-tab" class="tab">
+        <div id="swagger-ui"></div>
+      </div>
+      <div id="flow-tab" class="tab">
+        <div id="flow">
+          <div class="container">
+            <div class="flows-panel">
+              <h2>Flows:</h2>
+              <ul id="flows-list"></ul>
+            </div>
+            <div class="steps-panel">
+              <h2 id="flow-summary"></h2>
+              <p id="flow-description"></p>
+              <h3>Steps:</h2>
+                <ul id="steps-list"></ul>
+            </div>
+            <div class="content-panel">
+              <h2 id="step-summary"></h2>
+              <p id="step-description"></p>
+              <h2>Example:</h2>
+              <pre id="yaml-content" class="flow-content-section"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <div class="right-section">
       <section class="section">
@@ -148,25 +258,35 @@
   <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.52.0/swagger-ui-standalone-preset.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 
-
-  <!-- <script src="script.js"></script>
-  <script src="script2.js"></script>
-  <script src="script3.js"></script> -->
-
   <script>
-    // script.js
 
-    // script.js
-    // window.onload = function () {
-    //   // let url = Math.random() < 0.5?"https://raw.githubusercontent.com/beckn/mobility/main/api/mobility.yaml":"https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/build/transaction.yaml"
-    //   let url = "https://raw.githubusercontent.com/tanya-ondc/B2B-1.5/main/api/build/B2Bv2.0.1.yaml"
-    //   //"https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/build/transaction.yaml"
-    //   loadSwaggerUI(url)
-    //   populateEnums(url);
-    // }
+    // tabs.js
+
+    function openTab(evt, tabName) {
+      // Hide all tab content
+      var tabs = document.getElementsByClassName("tab");
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = "none";
+      }
+
+      // Remove active class from all tab buttons
+      var tabButtons = document.getElementsByClassName("tab-button");
+      for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+      }
+
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = "block";
+
+      // Add the active class to the clicked tab button
+      evt.currentTarget.className += " active";
+    }
+
+    // Open the first tab by default
+    document.getElementById('swagger-tab').style.display = "block";
+    document.getElementsByClassName("tab-button")[0].className += " active";
 
     window.onload = function () {
-      // let url = "https://raw.githubusercontent.com/tanya-ondc/B2B-1.5/main/api/build/B2Bv2.0.1.yaml"
       document.getElementById('file-input').addEventListener('change', function (event) {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -176,14 +296,16 @@
           let data = jsyaml.load(openApiYaml)
           initSchema(data["x-enum"])
           initTag(data["x-tags"])
+          loadFlow(data["x-flows"])
         };
 
         reader.readAsText(file);
       });
-      // loadSwaggerUI(url)
-      // populateEnums(url);
-    }
 
+    }
+  </script>
+  <script>
+    // swagger.js
 
 
     function loadSwaggerUIFile(openApiYaml) {
@@ -204,7 +326,6 @@
       var inputText = document.getElementById('swagger_url').value;
       var result = inputText.toLowerCase();
       loadSwaggerUI(result)
-      populateEnums(result);
     }
 
     function display(result) {
@@ -226,7 +347,10 @@
     };
 
 
-    // script2.js
+  </script>
+  <script>
+
+    // enum.js
 
     var parsedData
 
@@ -369,11 +493,11 @@
       loadDropdown2()
       loadDropdown4()
     }
+  </script>
+  <script>
 
 
-
-
-    // Script3.js
+    // tag.js
 
     function fetchData(url) {
       return fetch(url)
@@ -575,11 +699,98 @@
       loadTag()
     }
 
+  </script>
+  <script>
+    // flow.js
+
+    function loadSteps(steps) {
+      const stepsList = document.getElementById('steps-list');
+      const stepSummary = document.getElementById('step-summary');
+      const stepDescription = document.getElementById('step-description');
+      const yamlContent = document.getElementById('yaml-content');
+      // Render the steps list
+      steps.forEach((step, index) => {
+        const li = document.createElement('li');
+        li.textContent = step["summary"] + " API:" + step["api"];
+        li.classList.add('step');
+        li.dataset.index = index;
+        stepsList.appendChild(li);
+      });
+
+      // Add click event listener to each step
+      const flowElements = document.getElementsByClassName('step');
+      Array.from(flowElements).forEach(step => {
+        step.addEventListener('click', handleFlowClick);
+      });
+
+      // Handle step click event
+      function handleFlowClick(event) {
+        const clickedStep = event.target;
+        const stepIndex = clickedStep.dataset.index;
+
+        // Remove 'active' class from all steps
+        Array.from(flowElements).forEach(flow => {
+          flow.classList.remove('active');
+        });
+
+        // Add 'active' class to clicked step
+        clickedStep.classList.add('active');
+
+        // Get YAML content for the selected step index
+        const selectedStep = steps[stepIndex];
+        stepSummary.textContent = selectedStep["summary"]
+        stepDescription.textContent = selectedStep["description"]
+        yamlContent.textContent = JSON.stringify(selectedStep["example"]["value"], null, 2);
+      }
+
+    };
 
 
+    function loadFlow(flows) {
+      const flowsList = document.getElementById('flows-list');
+      const flowSummary = document.getElementById('flow-summary');
+      const flowDescription = document.getElementById('flow-description');
+      // Render the steps list
+      flows.forEach((flow, index) => {
+        const li = document.createElement('li');
+        li.textContent = flow["summary"];
+        li.classList.add('flow');
+        li.dataset.index = index;
+        flowsList.appendChild(li);
+      });
 
+      // Add click event listener to each step
+      const flowElements = document.getElementsByClassName('flow');
+      Array.from(flowElements).forEach(step => {
+        step.addEventListener('click', handleFlowClick);
+      });
+
+      // Handle step click event
+      function handleFlowClick(event) {
+        const clickedStep = event.target;
+        const flowIndex = clickedStep.dataset.index;
+
+        // Remove 'active' class from all steps
+        Array.from(flowElements).forEach(flow => {
+          flow.classList.remove('active');
+        });
+
+        // Add 'active' class to clicked step
+        clickedStep.classList.add('active');
+
+        // Get YAML content for the selected step index
+        const selectedFlow = flows[flowIndex];
+        flowSummary.textContent = selectedFlow["summary"]
+        flowDescription.textContent = selectedFlow["description"]
+        loadSteps(selectedFlow["steps"])
+      }
+
+    };
   </script>
 
+  <!--
+
+-->
 
 </body>
 
