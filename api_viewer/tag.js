@@ -2,6 +2,8 @@
 
 // tag.js
 
+var TagData
+
 function fetchData(url) {
   return fetch(url)
     .then(response => response.text())

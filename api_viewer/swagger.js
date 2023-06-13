@@ -1,9 +1,9 @@
 // swagger.js
 
 
-function loadSwaggerUIFile(openApiYaml) {
+function loadSwaggerUIFile(yamlFile) {
   const ui = SwaggerUIBundle({
-    spec: jsyaml.load(openApiYaml),
+    spec: jsyaml.load(yamlFile),
     dom_id: '#swagger-ui',
     presets: [
       SwaggerUIBundle.presets.apis,
