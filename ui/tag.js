@@ -20,6 +20,7 @@ function loadTagSchema() {
     option.text = key;
     dropdown1.add(option);
   });
+  loadTagPath()
 }
 
 function loadTagPath() {
@@ -37,6 +38,7 @@ function loadTagPath() {
     option.text = key;
     dropdown2.add(option);
   });
+  loadTagGroup()
 }
 
 function loadTagGroup() {
@@ -56,6 +58,7 @@ function loadTagGroup() {
     option.text = data[key]["code"];
     dropdown3.add(option);
   });
+  loadTag()
 }
 
 function loadTag() {
@@ -134,7 +137,7 @@ function displayTagGroup() {
   if (tableBody && tableBody != {}) tableBody.innerHTML = '';
   insertRow(tableBody, "Code", selectedObject3.code)
   insertRow(tableBody, "Description", selectedObject3.description)
-  insertRow(tableBody, "Refrences", selectedObject3.reference)
+  // insertRow(tableBody, "Refrences", selectedObject3.reference)
   displayTag()
 }
 
@@ -167,7 +170,7 @@ function displayTag() {
   if (tableBody && tableBody != {}) tableBody.innerHTML = '';
   insertRow(tableBody, "Code", tableData.code)
   insertRow(tableBody, "Description", tableData.description)
-  insertRow(tableBody, "Refrences", tableData.reference)
+  // insertRow(tableBody, "Refrences", tableData.reference)
 
 }
 
@@ -199,9 +202,6 @@ function populateTags(url) {
 function initTag(data) {
   TagData = data
   loadTagSchema()
-  loadTagPath()
-  loadTagGroup()
-  loadTag()
 }
 
 

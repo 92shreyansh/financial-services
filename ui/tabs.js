@@ -25,25 +25,28 @@ function openTab(evt, tabName) {
 document.getElementById('swagger-tab').style.display = "block";
 document.getElementsByClassName("tab-button")[0].className += " active";
 
-var openApiYaml
+// var openApiYaml
 
 window.onload = function () {
-  document.getElementById('file-input').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      openApiYaml = event.target.result;
+  // document.getElementById('file-input').addEventListener('change', function (event) {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.onload = function (event) {
+  //     openApiYaml = event.target.result;
 
-      let data = jsyaml.load(openApiYaml)
+      // let data = jsyaml.load(openApiYaml)
+      let data = build_spec
       initSchema(data["x-enum"])
       initTag(data["x-tags"])
       loadExample(data["x-examples"])
       addExample("on-demand")
       
-      // loadFlow(data["x-flows"])
-    };
+  //     // loadFlow(data["x-flows"])
+  //   };
 
-    reader.readAsText(file);
-  });
+  //   reader.readAsText(file);
+  // });
+
+
 
 }

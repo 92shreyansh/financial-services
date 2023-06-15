@@ -105,7 +105,7 @@ function displayTable() {
   if (tableBody && tableBody != {}) tableBody.innerHTML = '';
   insertRow(tableBody, "ENUM", tableData.code)
   insertRow(tableBody, "Description", tableData.description)
-  insertRow(tableBody, "Refrences", tableData.reference)
+  // insertRow(tableBody, "Refrences", tableData.reference)
   // insertRow(tableBody, "APIs", tableData.api)
 
 }

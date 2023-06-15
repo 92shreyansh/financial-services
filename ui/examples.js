@@ -24,7 +24,8 @@ function loadExample(data) {
     addExample("on-demand")
 }
 function addExample(example_set) {
-    let base = jsyaml.load(openApiYaml)
+    // let base = jsyaml.load(openApiYaml)
+    let base = build_spec;
     for (var key in examples[example_set]) {
         var list = examples[example_set][key]["examples"];
         base["paths"]["/" + key]["post"]["requestBody"]["content"]["application/json"]["examples"] = {};
