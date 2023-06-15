@@ -5,6 +5,10 @@ function loadSteps(steps) {
     const stepSummary = document.getElementById('step-summary');
     const stepDescription = document.getElementById('step-description');
     const yamlContent = document.getElementById('yaml-content');
+    stepsList.innerHTML = '';
+    stepSummary.innerHTML = '';
+    stepDescription.innerHTML = '';
+    yamlContent.innerHTML = '';
     // Render the steps list
     steps.forEach((step, index) => {
         const li = document.createElement('li');
@@ -47,6 +51,9 @@ function loadFlow(flows) {
     const flowsList = document.getElementById('flows-list');
     const flowSummary = document.getElementById('flow-summary');
     const flowDescription = document.getElementById('flow-description');
+    flowsList.innerHTML = '';
+    flowSummary.innerHTML = '';
+    flowDescription.innerHTML = '';
     // Render the steps list
     flows.forEach((flow, index) => {
         const li = document.createElement('li');

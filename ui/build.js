@@ -697,7 +697,8 @@ let build_spec = {
     "/on_search": {
       "post": {
         "tags": [
-          "Consumer Platform"
+          "Consumer Platform",
+          "Gateway"
         ],
         "description": "Provider Platform sends its catalog in response to a search request.",
         "requestBody": {
@@ -6333,6 +6334,307 @@ let build_spec = {
       }
     }
   },
+  "x-flows": [
+    {
+      "summary": "on-demand-auto-assignment",
+      "description": "The show cases the generic flow how a transaction between a BAP and BPP have whole perform a transaction of the nature where in a buyer would like to book a on demand service form location X(GPS) to localtion Y(GPS) with auto assignement of driver",
+      "reference": "if any",
+      "steps": [
+        {
+          "summary": "Search fix X to Y service",
+          "api": "search",
+          "description": "Users searches over the network to avail service form X to Y fix location (GPS)",
+          "reference": "if any",
+          "example": {
+            "summary": "Search for services in the city of Bengaluru by pickup and drop location",
+            "value": {
+              "context": {
+                "country": "IND",
+                "domain": "nic2004:60221",
+                "timestamp": "2023-03-23T04:41:16.000Z",
+                "bap_id": "example-test-bap.com",
+                "transaction_id": "6743e9e2-4fb5-487c-92b7-13ba8018f176",
+                "message_id": "6743e9e2-4fb5-487c-92b7-13ba8018f176",
+                "city": "std:080",
+                "core_version": "0.9.4",
+                "action": "search",
+                "bap_uri": "https://api.example-bap.com/pilot/bap/cab/v1"
+              },
+              "message": {
+                "intent": {
+                  "fulfillment": {
+                    "start": {
+                      "location": {
+                        "gps": "12.923608703179461, 77.61462964117527"
+                      }
+                    },
+                    "end": {
+                      "location": {
+                        "gps": "12.9346302, 77.61533969999999"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "summary": "Get list of all services form BPP1",
+          "api": "on_search",
+          "description": "BPP1 who is a mobility service provider send the catalog of all services that can used to transit for X to Y location",
+          "reference": "if any",
+          "example": {
+            "summary": "Return a mobility catalog",
+            "value": {
+              "context": {
+                "country": "IND",
+                "bpp_uri": "https://api.example-bpp.com/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f",
+                "domain": "nic2004:60221",
+                "timestamp": "2023-03-23T04:43:02Z",
+                "bap_id": "example-bap.com",
+                "transaction_id": "870782be-6757-43f1-945c-8eeaf9536259",
+                "bpp_id": "example-bpp.com",
+                "message_id": "21e54d3c-9c3b-47c1-aa3b-b0e7b20818ee",
+                "city": "std:080",
+                "core_version": "0.9.4",
+                "action": "on_search",
+                "bap_uri": "https://api.example-bap.com/pilot/bap/cab/v1"
+              },
+              "message": {
+                "catalog": {
+                  "bpp/descriptor": {
+                    "name": "Namma Yatri Partner"
+                  },
+                  "bpp/providers": [
+                    {
+                      "locations": [
+                        {
+                          "id": "1",
+                          "gps": "12.9164682,77.6089985"
+                        },
+                        {
+                          "id": "2",
+                          "gps": "12.91671,77.6092983"
+                        },
+                        {
+                          "id": "3",
+                          "gps": "12.9165733,77.6152167"
+                        },
+                        {
+                          "id": "4",
+                          "gps": "12.9068578,77.6044567"
+                        }
+                      ],
+                      "items": [
+                        {
+                          "id": "5777a0bf-9a08-49aa-a97d-1e5561a9622e",
+                          "descriptor": {
+                            "name": "Auto Ride",
+                            "code": "RIDE"
+                          },
+                          "price": {
+                            "maximum_value": "156",
+                            "currency": "INR",
+                            "minimum_value": "176",
+                            "value": "156 - 176 INR"
+                          },
+                          "tags": {
+                            "groups/1/descriptor/name": "Daytime Charges",
+                            "groups/1/descriptor/code": "fare_policy",
+                            "groups/1/display": true,
+                            "groups/1/list/1/descriptor/name": "Min Fare upto 2 km",
+                            "groups/1/list/1/value": "₹ 30 upto 2 km",
+                            "groups/1/list/2/descriptor/name": "Rate above Min. Fare",
+                            "groups/1/list/2/descriptor/code": "extra_fare",
+                            "groups/1/list/2/value": "₹15 / km",
+                            "groups/1/list/3/descriptor/name": "Driver Pickup Charges",
+                            "groups/1/list/3/descriptor/code": "pickup_charges",
+                            "groups/1/list/3/value": "₹ 10",
+                            "groups/1/list/4/descriptor/name": "Nominal Fare",
+                            "groups/1/list/4/descriptor/short_desc": "Driver may quote extra to cover for traffic, chance of return trip, etc.",
+                            "groups/1/list/4/descriptor/code": "nominal_fare",
+                            "groups/1/list/4/value": "₹ 10",
+                            "groups/1/list/5/descriptor/name": "Waiting Charges",
+                            "groups/1/list/5/descriptor/short_desc": "Driver may quote extra to cover for traffic, chance of return trip, etc.",
+                            "groups/1/list/5/descriptor/code": "waiting_charges",
+                            "groups/1/list/5/value": "₹ 0 / min",
+                            "groups/2/descriptor/name": "Night Charges",
+                            "groups/2/descriptor/code": "fare_policy",
+                            "groups/2/display": true,
+                            "groups/2/list/1/descriptor/name": "Night Charges",
+                            "groups/2/list/1/descriptor/code": "night_charges",
+                            "groups/2/list/1/value": "1.5x of daytime charges applicable at night from 10 PM to 5 PM",
+                            "groups/2/list/2/descriptor/name": "Night Shift Start",
+                            "groups/2/list/2/descriptor/code": "night_shift_start_time",
+                            "groups/2/list/2/value": "22:00:00",
+                            "groups/2/list/3/descriptor/name": "Night Shift End",
+                            "groups/2/list/3/descriptor/code": "night_shift_end_time",
+                            "groups/2/list/3/value": "05:00:00",
+                            "groups/3/descriptor/name": "General Information",
+                            "groups/3/descriptor/code": "info",
+                            "groups/3/display": true,
+                            "groups/3/list/1/descriptor/name": "Distance to nearest driver",
+                            "groups/3/list/1/descriptor/code": "distance_to_nearest_driver",
+                            "groups/3/list/1/value": "661 m",
+                            "groups/3/list/2/descriptor/name": "Wait time upto",
+                            "groups/3/list/2/descriptor/code": "waiting_time_estimated_threshold",
+                            "groups/3/list/2/value": "3 min"
+                          },
+                          "fulfillment_id": "fb5c84d4-1b59-4b9d-96b5-9d79107432c5",
+                          "payment_id": "1"
+                        }
+                      ],
+                      "fulfillments": [
+                        {
+                          "id": "fb5c84d4-1b59-4b9d-96b5-9d79107432c5",
+                          "start": {
+                            "location": {
+                              "gps": "12.9099828, 77.6118226",
+                              "address": {
+                                "ward": "Uttarahalli Hobli, Ramanjaneyanagar",
+                                "country": "India",
+                                "building": "6th Main Rd",
+                                "state": "Karnataka 560061",
+                                "city": "Bengaluru",
+                                "locality": "Uttarahalli Hobli",
+                                "door": "98A, Sarovarm 2nd cross",
+                                "area_code": "560061",
+                                "street": "Ramanjaneyanagar"
+                              }
+                            }
+                          },
+                          "end": {
+                            "location": {
+                              "gps": "12.9351856, 77.62459969999999",
+                              "address": {
+                                "ward": "Basavanagudi, Chikkanna Garden, Rangadore Memorial Hospital",
+                                "country": "India",
+                                "building": "Rangadore Memorial Hospital",
+                                "state": "Karnataka",
+                                "city": "Bengaluru",
+                                "locality": "Basavanagudi",
+                                "door": null,
+                                "area_code": "",
+                                "street": "Chikkanna Garden"
+                              }
+                            }
+                          },
+                          "vehicle": {
+                            "category": "AUTO_RICKSHAW"
+                          },
+                          "tags": {
+                            "groups/1/descriptor/code": "route_info",
+                            "groups/1/descriptor/name": "Route Information",
+                            "groups/1/display": true,
+                            "groups/1/list/1/descriptor/code": "encoded_polyline",
+                            "groups/1/list/1/descriptor/name": "Path",
+                            "groups/1/list/1/value": "_p~iF~ps|U_ulLnnqC_mqNvxq`@",
+                            "groups/1/list/2/descriptor/code": "waypoints",
+                            "groups/1/list/2/descriptor/name": "Waypoints",
+                            "groups/1/list/2/value": "[{\"gps\":\"12.9099828, 77.6118226\"},{\"gps\":\"12.9099828, 77.6118226\"},{\"gps\":\"12.9099828, 77.6118226\"},{\"gps\":\"12.9099828, 77.6118226\"}]"
+                          }
+                        }
+                      ],
+                      "payments": [
+                        {
+                          "id": "1",
+                          "type": "ON-FULFILLMENT",
+                          "collected_by": "BPP"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "summary": "BAP requests for a specific service from a specific BPP",
+          "api": "select",
+          "description": "The end consumer have selected the a specific service and would like to identify the qutation for that service here as the max_callbacks is set to 1 so the BAP would be only accepting only 1 on_select response",
+          "reference": "if any",
+          "example": {
+            "summary": "Get quote for a specific product from a mobility catalog with localization",
+            "value": {
+              "context": {
+                "country": "IND",
+                "bpp_uri": "https://api.example-bpp.com/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f",
+                "domain": "nic2004:60221",
+                "timestamp": "2023-03-23T04:46:45Z",
+                "bap_id": "example-bap.com",
+                "transaction_id": "870782be-6757-43f1-945c-8eeaf9536259",
+                "bpp_id": "example-bpp.com",
+                "message_id": "432fdfd6-0457-47b6-9fac-80cbe5c0a75b",
+                "city": "std:080",
+                "core_version": "0.9.4",
+                "action": "select",
+                "bap_uri": "https://api.example-bap.com/pilot/bap/cab/v1",
+                "max_callbacks": 3,
+                "ttl": "P120S"
+              },
+              "message": {
+                "order": {
+                  "items": [
+                    {
+                      "id": "5777a0bf-9a08-49aa-a97d-1e5561a9622e"
+                    }
+                  ],
+                  "fulfillment": {
+                    "start": {
+                      "location": {
+                        "gps": "12.910458, 77.543089",
+                        "address": {
+                          "ward": "Uttarahalli Hobli, Ramanjaneyanagar",
+                          "country": "India",
+                          "building": "6th Main Rd",
+                          "state": "Karnataka 560061",
+                          "city": "Bengaluru",
+                          "locality": "Uttarahalli Hobli",
+                          "door": "98A, Sarovarm 2nd cross",
+                          "area_code": "560061",
+                          "street": "Ramanjaneyanagar"
+                        }
+                      }
+                    },
+                    "end": {
+                      "location": {
+                        "gps": "12.9535139, 77.5710434",
+                        "address": {
+                          "ward": "Basavanagudi, Chikkanna Garden, Rangadore Memorial Hospital",
+                          "country": "India",
+                          "building": "Rangadore Memorial Hospital",
+                          "state": "Karnataka",
+                          "city": "Bengaluru",
+                          "locality": "Basavanagudi",
+                          "door": null,
+                          "area_code": "",
+                          "street": "Chikkanna Garden"
+                        }
+                      }
+                    },
+                    "customer": {
+                      "person": {
+                        "tags": {
+                          "groups/1/descriptor/name": "Localization",
+                          "groups/1/descriptor/code": "localization",
+                          "groups/1/display": false,
+                          "groups/1/list/1/descriptor/code": "lang",
+                          "groups/1/list/1/descriptor/name": "Language",
+                          "groups/1/list/1/value": "en"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
   "x-examples": {
     "on-demand": {
       "search": {

@@ -40,8 +40,8 @@ window.onload = function () {
       initTag(data["x-tags"])
       loadExample(data["x-examples"])
       addExample("on-demand")
+      loadFlow(data["x-flows"])
       
-  //     // loadFlow(data["x-flows"])
   //   };
 
   //   reader.readAsText(file);
