@@ -9,6 +9,7 @@ const args = process.argv.slice(2);
 var base_yaml = "./beckn_yaml.yaml"//args[0]; 
 var example_yaml = "./index.yaml"//args[1];
 var outputPath = "../build/build.yaml"
+var uiPath = "../../ui/build.js"
 
 // const outputPath = `./build.yaml`;
 // const unresolvedFilePath = `https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/components/index.yaml`
@@ -27,7 +28,7 @@ function getSwaggerYaml(example_set, outputPath){
       var spec = yaml.load(spec_file)
       addEnumTag(spec, schema)
 
-      GenerateYaml(spec, examples, outputPath);
+      GenerateYaml(spec, outputPath, uiPath);
       cleanup()
     })
     .catch((error) => {
@@ -62,15 +63,9 @@ function addEnumTag(base, layer) {
   base["x-examples"] = layer ["examples"]
 }
 
-function GenerateYaml(base, layer, output_yaml) {
-  // let examples = layer
-  // for (var key in examples) {
-  //   var list = examples[key]["examples"];
-  //   base["paths"]["/" + key]["post"]["requestBody"]["content"]["application/json"]["examples"] = {};
-  //   for (var key2 in list) {
-  //     base["paths"]["/" + key]["post"]["requestBody"]["content"]["application/json"]["examples"]["e" + key2] = list[key2];
-  //   }
-  // }
+function GenerateYaml(base, output_yaml, uiPath) {
   const output = yaml.dump(base);
   fs.writeFileSync(output_yaml, output, 'utf8');
+  const jsonDump = "let build_spec = " + JSON.stringify(base);
+  fs.writeFileSync(uiPath, jsonDump, 'utf8');
 }
