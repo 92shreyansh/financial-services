@@ -1,7 +1,16 @@
-const fs = require('fs');
-const yaml = require('js-yaml');
-const $RefParser = require('json-schema-ref-parser');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const yaml = require("js-yaml");
+const $RefParser = require("json-schema-ref-parser");
+const { execSync } = require("child_process");
+const Ajv = require("ajv");
+const ajv = new Ajv({
+  allErrors: true,
+  strict: "log",
+});
+const addFormats = require("ajv-formats");
+addFormats(ajv);
+require("ajv-errors")(ajv);
+const process = require('process');
 
 const args = process.argv.slice(2);
 // var example_set = args[0]
@@ -10,57 +19,119 @@ var base_yaml = "./beckn_yaml.yaml"//args[0];
 var example_yaml = "./index.yaml"//args[1];
 var outputPath = "../build/build.yaml"
 var uiPath = "../../ui/build.js"
-
+const flowsPath = "./flow/index.yaml";
 // const outputPath = `./build.yaml`;
 // const unresolvedFilePath = `https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/components/index.yaml`
 const tempPath = `./temp.yaml`;
 
 getSwaggerYaml("example_set", outputPath);
 
-function getSwaggerYaml(example_set, outputPath){
+async function baseYMLFile(file) {
+  try {
+    const schema = await $RefParser.dereference(file);
+    return schema;
+  } catch (error) {
+    console.error('Error parsing schema:', error);
+  }
+}
 
-  $RefParser.dereference(example_yaml)
-    .then((schema) => {
-      let examples = schema["examples"]
-      examples = examples[example_set];
-      buildSwagger(base_yaml, tempPath);
-      var spec_file = fs.readFileSync(tempPath)
-      var spec = yaml.load(spec_file)
-      addEnumTag(spec, schema)
+async function validateSchema(schema, data) {
+  const validate = ajv.compile(schema);
+  const valid = validate(data?.value);
+  if (!valid) {
+    console.log(validate.errors);
+    return true;
+  }
+  return false;
+}
 
-      GenerateYaml(spec, outputPath, uiPath);
-      cleanup()
-    })
-    .catch((error) => {
-      console.error('Error parsing schema:', error);
-    });
+async function validateFlows(flows, path, pathSchema){
+  for (const flowItem of flows) {
+    const { steps } = flowItem;
+    if (steps && steps?.length) {
+      for (const step of steps) {
+        if (step.api === path.substring(1)) {
+          const result = await validateSchema(pathSchema, step.example);
+          if (result) return hasTrueResult = true;
+        }
+      }
+    }
+  }
+}
 
+async function validateExamples(exampleSets,path, pathSchema){
+  for (const example of Object.keys(exampleSets)) {
+    const pathExample = exampleSets[example].example_set[path.substring(1)]?.examples;
+    if (pathExample?.length) {
+      for (const item of pathExample) {
+        const result = await validateSchema(pathSchema, item);
+        if (result) return hasTrueResult = true;
+      }
+    }
+  }
+}
+
+
+async function getSwaggerYaml(example_set, outputPath) {
+  const schema = await baseYMLFile(example_yaml);
+  const baseYAML = await baseYMLFile(base_yaml);
+  const flows = await baseYMLFile(flowsPath);
+  const { paths } = baseYAML;
+  const exampleSets = schema?.examples;
+  let hasTrueResult = false; // Flag variable
+
+  for (const path in paths) {
+    const pathSchema = paths[path]?.post?.requestBody?.content?.["application/json"]?.schema;
+    
+    if(!process.argv.includes('skip1')){
+      hasTrueResult = await validateFlows(flows, path,pathSchema)
+    }
+    if(!process.argv.includes('skip2')){
+      hasTrueResult = await validateExamples(exampleSets,path,pathSchema)
+    }
+    if(hasTrueResult) return;
+  }
+
+  if (!hasTrueResult) {
+    //remove these 
+    let examples = schema["examples"];
+    examples = examples[example_set];
+    buildSwagger(base_yaml, tempPath);
+    const spec_file = fs.readFileSync(tempPath);
+    const spec = yaml.load(spec_file);
+    addEnumTag(spec, schema);
+    GenerateYaml(spec, examples, outputPath);
+    cleanup();
+  }
 }
 
 function cleanup() {
   try {
     fs.unlinkSync(tempPath);
-    console.log('Temporary file deleted');
+    console.log("Temporary file deleted");
   } catch (error) {
-    console.error('Error deleting temporary file:', error);
+    console.error("Error deleting temporary file:", error);
   }
 }
 
 function buildSwagger(inPath, outPath) {
   try {
     const command = `swagger-cli bundle ${inPath} --outfile ${outPath} -t yaml`;
-    execSync(command, { stdio: 'inherit' });
+    execSync(command, { stdio: "inherit" });
   } catch (error) {
-    console.error('An error occurred while generating the Swagger bundle:', error);
+    console.error(
+      "An error occurred while generating the Swagger bundle:",
+      error
+    );
     process.exit(1);
   }
 }
 
 function addEnumTag(base, layer) {
-  base["x-enum"] = layer["enum"]
-  base["x-tags"] = layer["tags"]
-  base["x-flows"] = layer["flows"]
-  base["x-examples"] = layer ["examples"]
+  base["x-enum"] = layer["enum"];
+  base["x-tags"] = layer["tags"];
+  base["x-flows"] = layer["flows"];
+  base["x-examples"] = layer["examples"];
 }
 
 function GenerateYaml(base, output_yaml, uiPath) {
