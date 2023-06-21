@@ -64,6 +64,7 @@ async function validateExamples(exampleSets,path, pathSchema){
     const pathExample = exampleSets[example].example_set[path.substring(1)]?.examples;
     if (pathExample?.length) {
       for (const item of pathExample) {
+        console.log('path',path)
         const result = await validateSchema(pathSchema, item);
         if (result) return hasTrueResult = true;
       }
@@ -134,9 +135,10 @@ function addEnumTag(base, layer) {
   base["x-examples"] = layer["examples"];
 }
 
-function GenerateYaml(base, output_yaml, uiPath) {
-  const output = yaml.dump(base);
-  fs.writeFileSync(output_yaml, output, 'utf8');
-  const jsonDump = "let build_spec = " + JSON.stringify(base);
+function GenerateYaml(base, layer, output_yaml) {
+  
+  const output = yaml.dump(base);	
+  fs.writeFileSync(output_yaml, output, 'utf8');	
+  const jsonDump = "let build_spec = " + JSON.stringify(base);	
   fs.writeFileSync(uiPath, jsonDump, 'utf8');
 }
