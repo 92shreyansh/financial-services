@@ -10,15 +10,15 @@ const ajv = new Ajv({
 const addFormats = require("ajv-formats");
 addFormats(ajv);
 require("ajv-errors")(ajv);
-const process = require('process');
+const process = require("process");
 
 const args = process.argv.slice(2);
 // var example_set = args[0]
 // var flow_set = args[1]
-var base_yaml = "./beckn_yaml.yaml"//args[0]; 
-var example_yaml = "./index.yaml"//args[1];
-var outputPath = "../build/build.yaml"
-var uiPath = "../../ui/build.js"
+var base_yaml = "./beckn_yaml.yaml"; //args[0];
+var example_yaml = "./index.yaml"; //args[1];
+var outputPath = "../build/build.yaml";
+var uiPath = "../../ui/build.js";
 const flowsPath = "./flow/index.yaml";
 // const outputPath = `./build.yaml`;
 // const unresolvedFilePath = `https://raw.githubusercontent.com/beckn/protocol-specifications/master/api/transaction/components/index.yaml`
@@ -31,7 +31,7 @@ async function baseYMLFile(file) {
     const schema = await $RefParser.dereference(file);
     return schema;
   } catch (error) {
-    console.error('Error parsing schema:', error);
+    console.error("Error parsing schema:", error);
   }
 }
 
@@ -45,56 +45,62 @@ async function validateSchema(schema, data) {
   return false;
 }
 
-async function validateFlows(flows, path, pathSchema){
+async function validateFlows(flows, schemaMap) {
   for (const flowItem of flows) {
     const { steps } = flowItem;
     if (steps && steps?.length) {
       for (const step of steps) {
-        if (step.api === path.substring(1)) {
-          const result = await validateSchema(pathSchema, step.example);
-          if (result) return hasTrueResult = true;
+        for (const api of Object.keys(schemaMap)) {
+          if (step.api === api) {
+            const result = await validateSchema(schemaMap[api], step.example);
+            if (result) return (hasTrueResult = true);
+          }
         }
       }
     }
   }
 }
 
-async function validateExamples(exampleSets,path, pathSchema){
+async function validateExamples(exampleSets, schemaMap) {
   for (const example of Object.keys(exampleSets)) {
-    const pathExample = exampleSets[example].example_set[path.substring(1)]?.examples;
-    if (pathExample?.length) {
-      for (const item of pathExample) {
-        console.log('path',path)
-        const result = await validateSchema(pathSchema, item);
-        if (result) return hasTrueResult = true;
-      }
+    for (const api of Object.keys(schemaMap)) {
+      const exampleList = exampleSets[example].example_set[api]?.examples;
+      if (exampleList !== undefined)
+        for (const payload of Object.keys(exampleList)) {
+          const result = await validateSchema(
+            schemaMap[api],
+            exampleList[payload]
+          );
+          if (result) return (hasTrueResult = true);
+        }
     }
   }
 }
 
-
 async function getSwaggerYaml(example_set, outputPath) {
   const schema = await baseYMLFile(example_yaml);
   const baseYAML = await baseYMLFile(base_yaml);
-  const flows = await baseYMLFile(flowsPath);
+  const { flows, examples:exampleSets } = schema;
   const { paths } = baseYAML;
-  const exampleSets = schema?.examples;
   let hasTrueResult = false; // Flag variable
+  let schemaMap = {};
 
   for (const path in paths) {
-    const pathSchema = paths[path]?.post?.requestBody?.content?.["application/json"]?.schema;
-    
-    if(!process.argv.includes('skip1')){
-      hasTrueResult = await validateFlows(flows, path,pathSchema)
-    }
-    if(!process.argv.includes('skip2')){
-      hasTrueResult = await validateExamples(exampleSets,path,pathSchema)
-    }
-    if(hasTrueResult) return;
+    const pathSchema =
+      paths[path]?.post?.requestBody?.content?.["application/json"]?.schema;
+    schemaMap[path.substring(1)] = pathSchema;
   }
 
+  if (!process.argv.includes("skip1")) {
+    hasTrueResult = await validateFlows(flows, schemaMap);
+  }
+  if (!process.argv.includes("skip2")) {
+    hasTrueResult = await validateExamples(exampleSets, schemaMap);
+  }
+  if (hasTrueResult) return;
+
   if (!hasTrueResult) {
-    //remove these 
+    //remove these
     let examples = schema["examples"];
     examples = examples[example_set];
     buildSwagger(base_yaml, tempPath);
@@ -136,9 +142,8 @@ function addEnumTag(base, layer) {
 }
 
 function GenerateYaml(base, layer, output_yaml) {
-  
-  const output = yaml.dump(base);	
-  fs.writeFileSync(output_yaml, output, 'utf8');	
-  const jsonDump = "let build_spec = " + JSON.stringify(base);	
-  fs.writeFileSync(uiPath, jsonDump, 'utf8');
+  const output = yaml.dump(base);
+  fs.writeFileSync(output_yaml, output, "utf8");
+  const jsonDump = "let build_spec = " + JSON.stringify(base);
+  fs.writeFileSync(uiPath, jsonDump, "utf8");
 }
