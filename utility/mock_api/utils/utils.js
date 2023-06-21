@@ -7,11 +7,10 @@ const operator = require("../operator/util.js")
 //we are getting the schemas from a url but we can get it from a local file as well
 
 const resolveTemplate = (context, template, values) => {
-  console.log(template)
   return template.replace(/\{\{(\w+)\}\}/g, (match, key) => {
     var value = values[key]
     if(value && value["operation"]){
-        value = operator.evaluateOpretion(context, value["operation"]);
+        value = operator.evaluateOperation(context, value["operation"]);
     }
     return value !== undefined ? value : match;
   });

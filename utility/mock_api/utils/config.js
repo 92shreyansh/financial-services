@@ -12,7 +12,7 @@ $RefParser.dereference(yamlObject)
   .then((schema) => {
     config = schema;
     const resolvedYamlString = yaml.stringify(schema);
-    console.log("Config Read: \n", resolvedYamlString);
+    // console.log("Config Read: \n", resolvedYamlString);
   })
   .catch((error) => {
     console.error('Error parsing schema:', error);

@@ -1,6 +1,6 @@
 const {GenerateUuidOperation, ReadOperation, GenerateTmpstmpOperation} = require("./operations.js")
 const {Input} = require("./schema.js")
-function evaluateOpretion(context, op) {
+function evaluateOperation(context, op) {
     var opt = __getOperation(context, op.type)
     if(op["input"]){
         opt.input = __evaluateInput(context, op["input"])
@@ -24,4 +24,4 @@ function __getOperation(context, op){
     }
 }
 
-module.exports={evaluateOpretion}
+module.exports={evaluateOperation}

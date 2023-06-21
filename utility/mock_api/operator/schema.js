@@ -4,7 +4,7 @@ class IOElement{
     value;
     __process(){
         if(this.operation) {
-            this.value = evaluateOpretion(this.context, this.operation);
+            this.value = evaluateOperation(this.context, this.operation);
         }
         return this
     }
