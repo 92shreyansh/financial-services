@@ -91,6 +91,8 @@ async function getSwaggerYaml(example_set, outputPath) {
     schemaMap[path.substring(1)] = pathSchema;
   }
 
+  // writeSchemaMap("./schema", schemaMap)
+
   if (!process.argv.includes("skip1")) {
     hasTrueResult = await validateFlows(flows, schemaMap);
   }
@@ -118,6 +120,14 @@ function cleanup() {
     console.log("Temporary file deleted");
   } catch (error) {
     console.error("Error deleting temporary file:", error);
+  }
+}
+
+function writeSchemaMap(folder, schemaMap){
+  for (const api of Object.keys(schemaMap)){
+    var schema_yaml = folder+"/"+api+".yaml"
+    var schmea = yaml.dump(schemaMap[api]);
+    fs.writeFileSync(schema_yaml, schmea, "utf8");
   }
 }
 
